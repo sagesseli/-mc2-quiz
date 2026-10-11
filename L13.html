@@ -1,0 +1,550 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第十三課 完課測驗</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"><style>:root{
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#1d2233; --muted:#5d6479; --line:#dde0ea;
+  --accent:#34489a; --accent-soft:#e6e9f6; --ok:#257a4a; --ok-soft:#e3f2e9; --bad:#b0343a; --bad-soft:#f8e4e5;
+  --warm:#b4691f; --warm-soft:#fbefe1; --grid:#e7c9c9;
+  --f-han:"LXGW WenKai TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151824; --surface:#1e2232; --ink:#e8eaf2; --muted:#a2a8bd; --line:#33384c;
+  --accent:#9fb0f5; --accent-soft:#2a3150; --ok:#72c996; --ok-soft:#1d3428; --bad:#f08f93; --bad-soft:#3d2125;
+  --warm:#f0b070; --warm-soft:#3a2a18; --grid:#5a3c40; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151824; --surface:#1e2232; --ink:#e8eaf2; --muted:#a2a8bd; --line:#33384c;
+  --accent:#9fb0f5; --accent-soft:#2a3150; --ok:#72c996; --ok-soft:#1d3428; --bad:#f08f93; --bad-soft:#3d2125;
+  --warm:#f0b070; --warm-soft:#3a2a18; --grid:#5a3c40; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:flex;flex-direction:column;gap:20px}
+h1,h2{font-family:var(--f-han);font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:2rem;line-height:1.25}
+h2{font-size:1.35rem}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.secs{display:flex;flex-direction:column;gap:10px}
+.sec{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.sec:hover:not(:disabled){border-color:var(--accent)}
+.sec:disabled{cursor:default;opacity:.85}
+.sec .han{font-family:var(--f-han);font-size:1.6rem;width:2.6rem;height:2.6rem;display:grid;place-items:center;border-radius:8px;background:var(--accent-soft);color:var(--accent)}
+.sec .t{font-weight:700}
+.sec .d{font-size:.85rem;color:var(--muted)}
+.sec .score{font-size:.85rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sec .score b{display:block;font-size:1.05rem;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 18px;font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn:disabled{opacity:.45;cursor:default}
+.bar{display:flex;align-items:center;gap:12px}
+.bar .back{border:none;background:none;color:var(--muted);padding:4px 0}
+.prog{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.count{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 18px;display:flex;flex-direction:column;gap:16px}
+.q{font-family:var(--f-han);font-size:1.4rem;line-height:1.55}
+.q .blank{display:inline-block;min-width:2.4em;border-bottom:2px solid var(--accent);margin-inline:.15em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts.wide{grid-template-columns:1fr}
+.opt{text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:12px 14px;min-height:52px}
+.opt.han{font-family:var(--f-han);font-size:1.25rem}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.chosen{border-color:var(--accent);background:var(--accent-soft)}
+.fb{border-radius:10px;padding:12px 14px;font-size:.95rem}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.no{background:var(--bad-soft);color:var(--bad)}
+.fb p{margin:4px 0 0;color:var(--ink)}
+.clock{align-self:center}
+.clock circle{fill:var(--surface);stroke:var(--ink);stroke-width:3}
+.clock line{stroke:var(--ink);stroke-linecap:round}
+.clock text{fill:var(--muted);font-size:11px;font-family:var(--f-body)}
+/* picture helpers */
+.frames{align-self:center;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.frame{border:1.5px solid var(--line);border-radius:12px;background:var(--bg);min-width:96px;padding:10px 12px 8px;text-align:center;position:relative}
+.frame .em{font-size:2.9rem;line-height:1.15;letter-spacing:.04em;display:block}
+.frame .lb{font-size:.9rem;color:var(--muted);display:block;margin-top:2px}
+.frame.x::after{content:"";position:absolute;inset:8px;background:linear-gradient(to top right,transparent calc(50% - 2px),var(--bad) calc(50% - 2px),var(--bad) calc(50% + 2px),transparent calc(50% + 2px))}
+.frame.hi{border-color:var(--bad);border-width:2.5px}
+.arrow{align-self:center;font-size:1.6rem;color:var(--muted)}
+.sign{align-self:center;border:2px solid var(--ink);border-radius:10px;padding:12px 18px;line-height:1.75;background:var(--surface);max-width:100%;min-width:min(16rem,100%)}
+.sign-t{font-weight:700;font-size:1.12rem;text-align:center;border-bottom:1px solid var(--line);margin-bottom:6px;padding-bottom:4px}
+.sign .sm{font-size:.88rem;color:var(--muted)}
+.sign.warm{border-color:var(--warm);background:var(--warm-soft)}
+.sign.warm .sign-t{color:var(--warm);border-color:var(--warm)}
+.sign table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.sign th,.sign td{border:1px solid var(--line);padding:4px 8px;text-align:center;font-size:.95rem}
+.sign th{background:var(--accent-soft);font-weight:600}
+.sign .li{display:flex;justify-content:space-between;gap:18px}
+.chat{align-self:stretch;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.chat .top{text-align:center;font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px}
+.msg{max-width:85%;padding:8px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-family:var(--f-han);font-size:1.05rem;line-height:1.6}
+.msg .who{display:block;font-family:var(--f-body);font-size:.75rem;color:var(--muted)}
+.msg.me{align-self:flex-end;background:var(--ok-soft);border-color:transparent}
+.passage{border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:12px 16px;max-height:46vh;overflow-y:auto;font-family:var(--f-han);font-size:1.12rem;line-height:1.95}
+.passage p{margin:0 0 .6em;text-indent:2em}
+.passage p.ni{text-indent:0}
+.ptitle{font-weight:700;text-align:center;margin-bottom:6px}
+.passage .cz{display:inline-block;min-width:2.6em;text-align:center;border-bottom:2px solid var(--line);color:var(--muted);font-family:var(--f-body);font-size:.9rem;text-indent:0}
+.passage .cz.on{border-color:var(--accent);color:var(--accent);font-weight:700;background:var(--accent-soft);border-radius:4px 4px 0 0}
+.passage .cz.done{color:var(--ink);font-family:var(--f-han);font-size:1.05rem}
+.slot{min-height:58px;border:1.5px dashed var(--line);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.slot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+.slot.no{border-style:solid;border-color:var(--bad);background:var(--bad-soft)}
+.slot .ph{color:var(--muted);font-size:.9rem;padding-inline:6px}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--f-han);font-size:1.25rem;border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px}
+.chip.used{visibility:hidden}
+.slot .chip{border-color:var(--accent);background:var(--accent-soft)}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl td{padding:8px 4px;border-bottom:1px solid var(--line)}
+.tbl td:last-child{text-align:right}
+.total{font-size:2.6rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.total small{font-size:1rem;color:var(--muted);font-weight:400}
+textarea{width:100%;min-height:200px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:14px/1.6 var(--f-body);padding:12px;resize:vertical}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:.9rem;color:var(--muted)}
+.field input{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+.who-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.wrong-list{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+.wrong-list li{font-size:.95rem}
+.wrong-list .x{color:var(--muted);font-size:.88rem}
+.status{border-radius:10px;padding:10px 14px;font-size:.95rem}
+.status.ok{background:var(--ok-soft);color:var(--ok)}
+.status.no{background:var(--bad-soft);color:var(--bad)}
+.status.wait{background:var(--accent-soft);color:var(--accent)}
+@media (max-width:420px){.opts{grid-template-columns:1fr}.q{font-size:1.25rem}h1{font-size:1.7rem}.frame .em{font-size:2.4rem}.frame{min-width:84px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.chip.punct{color:var(--bad);font-weight:700;min-width:2.8em;border-color:var(--bad)}
+</style></head><body><div class="wrap" id="app"></div><script>window.MODE="class";</script><script src="config.js"></script><script>/* picture / practical-text builders used by lesson data files */
+window.P=(function(){
+  const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  return{
+    // frames([["🧹","①"],["🍽️","②",{x:1}]],{arrows:true})
+    frames(list,opt={}){return`<div class="frames">${list.map((f,i)=>`${opt.arrows&&i?'<span class="arrow">→</span>':""}<div class="frame${f[2]&&f[2].x?" x":""}${f[2]&&f[2].hi?" hi":""}"><span class="em">${f[0]}</span>${f[1]?`<span class="lb">${e(f[1])}</span>`:""}</div>`).join("")}</div>`},
+    one(em,label){return this.frames([[em,label]])},
+    sign(title,lines,opt={}){return`<div class="sign${opt.warm?" warm":""}"${opt.left===false?' style="text-align:center"':""}><div class="sign-t">${e(title)}</div>${lines.map(l=>Array.isArray(l)?`<div class="li"><span>${e(l[0])}</span><span>${e(l[1])}</span></div>`:(l.startsWith("~")?`<div class="sm">${e(l.slice(1))}</div>`:`<div>${e(l)}</div>`)).join("")}</div>`},
+    table(title,head,rows,opt={}){return`<div class="sign${opt.warm?" warm":""}"><div class="sign-t">${e(title)}</div><table><tr>${head.map(h=>`<th>${e(h)}</th>`).join("")}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${e(c)}</td>`).join("")}</tr>`).join("")}</table>${opt.foot?`<div class="sm" style="margin-top:6px">${e(opt.foot)}</div>`:""}</div>`},
+    chat(title,msgs){return`<div class="chat"><div class="top">${e(title)}</div>${msgs.map(m=>`<div class="msg${m[2]?" me":""}"><span class="who">${e(m[0])}</span>${e(m[1])}</div>`).join("")}</div>`}
+  };
+})();
+</script><script>window.LESSON={no:13,cn:"十三",title:"我要買筆電",
+desc:{gram:"不管…都…、…不如…、Vs了（一）點兒、比／比較／（跟…）比起來、差（一）點兒（就）、白V"},
+passages:{
+ cz1:{title:"買新手機",body:["我的手機用了五年，最近電池很不［1］，才用一個小時就沒電了。修理要三千塊，我覺得［2］買一支新的。","我先上網［3］了哪家店比較便宜。店員說這個禮拜所有手機都打八折，［4］超過兩萬元，還送一個真皮的手機套。","我看上的那支手機很好用，可是貴了［5］，要兩萬五。最後我還是買了，因為打折以後只要兩萬塊，這樣的機會不多，一定要把握！"]},
+ rd1:{html:P.sign("💻 3C 大特賣（12月1日～12月7日）",["・所有筆電、平板：打八五折","・買滿 30,000 元，再送 3,000 元禮券","・傳真機、印表機不打折","・帶舊手機來，可以便宜 1,000 元（每人限一支）","~★ 所有產品都有一年保證，請保留保證書。","~★ 打折的產品不能退貨，只能換貨（7天以內）。"],{warm:true})},
+ rd2:{title:"我的第一台筆電",body:["我在台灣沒買過3C產品，所以買電腦以前，先看了好幾本電腦雜誌，也跟有經驗的朋友打聽。朋友說，不管去哪家店，都要先上網比比價格，這樣才不會白花錢。我覺得他說得很有道理。","本來我想買平板，因為平板比筆電輕，也比較便宜。可是店員認為，跟平板比起來，筆電比較適合大學生，因為寫報告、做功課都方便多了。","店員推薦的那台筆電是最新的產品，功能很多，可是價格高了一點兒，要三萬六。我最近窮死了，因為上個月我把手機弄丟了，父母說我不愛惜東西，兩個月不給我零用錢。還好那個禮拜打八五折，又有「滿三萬送三千」的活動，所以我只花了大約兩萬八就買到了。","付了錢以後，我差一點兒忘了拿自己的手機，真糊塗！還好店員叫住了我，要不然我又得白跑一趟了。"]}
+},
+pics:{
+ compare:()=>P.table("筆電 vs 平板",["","筆電 💻","平板 📱"],[["重量","1.5 公斤","0.5 公斤"],["價格","30,000","18,000"],["寫報告","很方便","不太方便"]]),
+ battery:()=>P.frames([["🔋 100%","早上九點"],["🪫 0%","早上十點"]],{arrows:true}),
+ sale:()=>P.sign("今天全部商品",["打八折"],{left:false,warm:true}),
+ shoes:()=>P.frames([["👟","這雙鞋"],["🦶","他的腳"]]),
+ late:()=>P.frames([["🚆💨 8:00","火車開走"],["🏃 8:01","他到了"]]),
+ closed:()=>P.frames([["🍜🏠","走了一個小時"],["🔒 今天休息","餐廳"]]),
+ repair:()=>P.frames([["💻🔧","修理費 8,000"],["💻✨","新電腦 9,000"]]),
+ weather:()=>P.table("今天的氣溫",["台北","高雄"],[["30°C","34°C"]])
+},
+q:[
+ {s:"vocab",id:"v1",q:"請問筆電和平板有什麼＿＿？",o:["差別","功能","產品","價格"],x:"差別：difference。"},
+ {s:"vocab",id:"v2",q:"這支新手機的＿＿很多，可以照相、上網、付錢。",o:["功能","差別","電池","道理"],x:"功能：function。"},
+ {s:"vocab",id:"v3",q:"他這次到美國去＿＿，幫公司處理了不少問題。",o:["出差","退休","加班","打聽"],x:"出差：business trip。"},
+ {s:"vocab",id:"v4",q:"很多人＿＿這個牌子的手機電池有問題。",o:["抱怨","保證","把握","答應"],x:"抱怨：complain。"},
+ {s:"vocab",id:"v5",q:"你得把保證書帶來，我們才能幫你免費＿＿。",o:["修理","處理","解決","打折"],x:"修理：repair。"},
+ {s:"vocab",id:"v6",q:"這麼多問題，今天＿＿討論不完，改天再說吧。",o:["恐怕","不管","大約","差點兒"],x:"恐怕：I'm afraid that。"},
+ {s:"vocab",id:"v7",q:"這個週末超過三千塊的東西都打九折，請＿＿機會。",o:["把握","保證","答應","抱怨"],x:"把握機會：seize the opportunity。"},
+ {s:"vocab",id:"v8",q:"買電腦以前，最好先上網＿＿哪家店比較便宜。",o:["打聽","答應","抱怨","逼"],x:"打聽：ask around, inquire。"},
+ {s:"vocab",id:"v9",q:"你說得很有＿＿，我聽你的。",o:["道理","差別","功能","價格"],x:"有道理：makes sense。"},
+ {s:"vocab",id:"v10",q:"我最近＿＿死了，連三明治也吃不起。",o:["窮","糊塗","正常","輕"],x:"窮：poor。"},
+ {s:"vocab",id:"v11",q:"他很＿＿東西，所以東西都能用很久。",o:["愛惜","抱怨","答應","逼"],x:"愛惜：treasure, take good care of。"},
+ {s:"vocab",id:"v12",q:"別＿＿孩子做他們不喜歡的事情。",o:["逼","答應","打聽","保證"],x:"逼：force。"},
+ {s:"vocab",id:"v13",q:"我＿＿朋友去幫他過生日，可是我忘了。",o:["答應","逼","把握","修理"],x:"答應：promise, agree。"},
+ {s:"vocab",id:"v14",q:"現在的科技非常進步，能幫我們＿＿很多問題。",o:["解決","修理","答應","抱怨"],x:"解決問題：solve problems。"},
+ {s:"gram",id:"g1",q:"＿＿這支手機貴不貴，我都要買。",o:["不管","雖然","只要","不如"],x:"不管……，都……：no matter。"},
+ {s:"gram",id:"g2",q:"哪一句是對的？",o:["不管看什麼電影，我都喜歡跟朋友一起看。","不管看什麼電影，我也喜歡跟朋友看一起。","雖然看什麼電影，我都喜歡跟朋友一起看。","不管看電影，我都喜歡跟朋友一起看。"],x:"不管＋QW／A不A／A還是B，都……。"},
+ {s:"gram",id:"g3",q:"這台電腦太舊了，修理要花很多錢，＿＿買一台新的。",o:["不如","不管","不必","不但"],x:"……，不如……：後面的辦法比較好。"},
+ {s:"gram",id:"g4",q:"這堂課很有意思，可是學生多了＿＿。",o:["一點兒","有點兒","一些點","點兒一"],x:"Vs了（一）點兒：比剛好的多一點兒（不太滿意）。"},
+ {s:"gram",id:"g5",q:"哪一句是對的？",o:["他的中文說得不錯，可是慢了一點兒。","他的中文說得不錯，可是一點兒慢了。","他的中文說得不錯，可是有一點兒慢了一點兒。","他的中文說得不錯，可是慢一點兒了。"],x:"Vs＋了＋（一）點兒。"},
+ {s:"gram",id:"g6",q:"跟國外旅遊＿＿，國內旅遊便宜一點兒。",o:["比起來","比較","比","一樣"],x:"跟A比起來，B……。"},
+ {s:"gram",id:"g7",q:"平板＿＿筆電便宜，所以我比較想買平板。",o:["比","比起來","比較","跟"],x:"A比B＋Vs。"},
+ {s:"gram",id:"g8",q:"我以為那些東西是垃圾，差一點兒＿＿丟了。",o:["就","才","都","還"],x:"差（一）點兒（就）：almost。"},
+ {s:"gram",id:"g9",q:"今天早上我太晚起床，＿＿遲到了。",o:["差一點兒","一點兒","有一點兒","差得多"],x:"差一點兒遲到：almost late（可是沒遲到）。"},
+ {s:"gram",id:"g10",q:"我說了這麼多次，你還是沒聽懂，真是＿＿說了。",o:["白","空","不","沒"],x:"白V：做了，可是沒有用。"},
+ {s:"gram",id:"g11",q:"那家餐廳很遠，你先打電話問問，別＿＿跑一趟。",o:["白","差","多","不如"],x:"白跑：去了可是沒用。"},
+ {s:"gram",id:"g12",q:"A：我們去那家飯館吧。　B：那家常常客滿，＿＿去便利商店買三明治。",o:["不如","不管","不必","恐怕"],x:"不如：提出比較好的辦法。"},
+ {s:"order",id:"o1",t:["不管","大人","還是","小孩","，","都","喜歡流行的東西"],p:"。",alt:["不管小孩還是大人，都喜歡流行的東西"],x:"不管大人還是小孩，都喜歡流行的東西。"},
+ {s:"order",id:"o2",t:["那些飲料","太甜了","，","不如","喝水"],p:"。",x:"那些飲料太甜了，不如喝水。"},
+ {s:"order",id:"o3",t:["健身房的","費用","高了","一點兒"],p:"。",x:"健身房的費用高了一點兒。"},
+ {s:"order",id:"o4",t:["跟平板","比起來","，","筆電","比較重"],p:"。",alt:["筆電跟平板比起來，比較重"],x:"跟平板比起來，筆電比較重。"},
+ {s:"order",id:"o5",t:["我","差一點兒","就","忘了","拿手機"],p:"。",x:"我差一點兒就忘了拿手機。"},
+ {s:"order",id:"o6",t:["朋友","忽然說不去了","，","我","白準備了"],p:"。",x:"朋友忽然說不去了，我白準備了。"},
+ {s:"pic",id:"p1",pic:"compare",q:"哪一句是對的？",o:["跟筆電比起來，平板比較輕。","平板比筆電貴。","筆電不如平板方便寫報告。","筆電跟平板一樣重。"],x:"0.5 公斤 < 1.5 公斤：平板比較輕。"},
+ {s:"pic",id:"p2",pic:"battery",q:"他的手機怎麼了？",o:["電池不太正常，一個小時就沒電了。","電池很好，可以用一整天。","手機被偷了。","手機打八折。"],x:"一個小時從 100% 到 0%：不正常。"},
+ {s:"pic",id:"p3",pic:"sale",q:"一件一千塊的衣服，今天要多少錢？",o:["八百塊","兩百塊","九百塊","八十塊"],x:"打八折：1,000 × 0.8 ＝ 800。"},
+ {s:"pic",id:"p4",pic:"shoes",q:"這雙鞋怎麼樣？",o:["這雙鞋小了一點兒。","這雙鞋大了一點兒。","這雙鞋剛剛好。","這雙鞋貴了一點兒。"],x:"鞋比腳小：小了一點兒。"},
+ {s:"pic",id:"p5",pic:"late",q:"哪一句是對的？",o:["他差一點兒就趕上火車了。","他趕上火車了。","他差一點兒遲到，可是趕上了。","他提早到了。"],x:"只差一分鐘，可是沒趕上：差一點兒就趕上了。"},
+ {s:"pic",id:"p6",pic:"closed",q:"他走了一個小時到餐廳，可是餐廳休息。他會說什麼？",o:["我白跑了一趟！","我差一點兒到了。","不管怎麼樣，我都吃到了。","我吃得了。"],x:"去了可是沒用：白跑。"},
+ {s:"pic",id:"p7",pic:"repair",q:"你會給他什麼建議？",o:["修理太貴了，不如買一台新的。","修理比買新的便宜多了。","不管多少錢，都要修理。","新電腦比修理便宜很多。"],x:"修理 8,000，新的 9,000：不如買新的。"},
+ {s:"pic",id:"p8",pic:"weather",q:"哪一句是對的？",o:["跟台北比起來，高雄比較熱。","台北比高雄熱。","台北跟高雄一樣熱。","高雄不如台北熱。"],x:"34 > 30：高雄比較熱。"},
+ {s:"cloze",id:"c1",passage:"cz1",n:1,o:["正常","糊塗","進步","窮"],x:"電池不正常。"},
+ {s:"cloze",id:"c2",passage:"cz1",n:2,o:["不如","不管","不必","恐怕"],x:"修理太貴，不如買新的。"},
+ {s:"cloze",id:"c3",passage:"cz1",n:3,o:["打聽","答應","抱怨","把握"],x:"先上網打聽。"},
+ {s:"cloze",id:"c4",passage:"cz1",n:4,o:["要是","不管","不如","差一點兒"],x:"要是超過兩萬元，還送……。"},
+ {s:"cloze",id:"c5",passage:"cz1",n:5,o:["一點兒","一下","點兒一","有點兒"],x:"貴了一點兒。"},
+ {s:"read",id:"r1",passage:"rd1",q:"一台四萬元的筆電，打折以後要多少錢？",o:["34,000 元","32,000 元","36,000 元","40,000 元"],x:"八五折：40,000 × 0.85 ＝ 34,000。"},
+ {s:"read",id:"r2",passage:"rd1",q:"哪一個東西不打折？",o:["傳真機","筆電","平板","所有產品都打折"],x:"傳真機、印表機不打折。"},
+ {s:"read",id:"r3",passage:"rd1",q:"買了打折的平板，回家發現有問題，可以怎麼做？",o:["七天以內拿去換一台。","拿回去退錢。","不能換，也不能退。","一年以後再去。"],x:"打折的產品不能退貨，只能換貨（7天以內）。"},
+ {s:"read",id:"r4",passage:"rd2",q:"朋友說買電腦以前要做什麼？",o:["先上網比比價格。","先看新聞。","先問父母。","先去光華商場。"],x:"「不管去哪家店，都要先上網比比價格」。"},
+ {s:"read",id:"r5",passage:"rd2",q:"店員為什麼認為筆電比較適合大學生？",o:["寫報告、做功課比較方便。","筆電比較輕。","筆電比較便宜。","筆電的顏色比較多。"],x:"「寫報告、做功課都方便多了」。"},
+ {s:"read",id:"r6",passage:"rd2",q:"作者最近為什麼很窮？",o:["他把手機弄丟了，父母不給他零用錢。","他買了太多東西。","他沒有工作。","他的錢被偷了。"],x:"「父母說我不愛惜東西，兩個月不給我零用錢」。"},
+ {s:"read",id:"r7",passage:"rd2",q:"作者最後花了多少錢買筆電？",o:["大約兩萬八","三萬六","三萬","兩萬"],x:"打八五折又滿三萬送三千：大約兩萬八。"},
+ {s:"read",id:"r8",passage:"rd2",q:"作者為什麼說自己「真糊塗」？",o:["他差一點兒忘了拿自己的手機。","他買錯電腦了。","他忘了付錢。","他走錯商店了。"],x:"「我差一點兒忘了拿自己的手機，真糊塗」。"}
+]};
+</script><script>/* 時代華語2 完課測驗 engine — shared by the tutor (artifact) and class (GitHub) versions.
+   MODE = "tutor" : instant feedback, redo wrong items, copy a report for the teacher.
+   MODE = "class" : student signs in, no answers shown until 交卷, result POSTed to Google Sheet. */
+(function(){
+"use strict";
+const L=window.LESSON, MODE=window.MODE||"tutor", CFG=window.QUIZ_CONFIG||{};
+const CATALOG={
+  vocab:{han:"詞",name:"生詞",desc:"看句子，選生詞"},
+  mw:{han:"量",name:"量詞",desc:"量詞複習"},
+  gram:{han:"法",name:"語法",desc:"本課語法"},
+  order:{han:"排",name:"排句子",desc:"點詞語，排出正確的句子"},
+  pic:{han:"圖",name:"看圖回答",desc:"TOCFL 圖片題：看圖，選最合適的句子"},
+  cloze:{han:"填",name:"短文填空",desc:"TOCFL 選詞填空：讀短文，選出空格的答案"},
+  read:{han:"讀",name:"閱讀理解",desc:"讀訊息、公告和短文，回答問題"}
+};
+const ORDER=["vocab","mw","gram","order","pic","cloze","read"];
+const SECTIONS=ORDER.filter(id=>L.q.some(q=>q.s===id)).map(id=>Object.assign({id},CATALOG[id],(L.desc||{})[id]?{desc:L.desc[id]}:{}));
+const FIXED=new Set(["pic","cloze","read"]);
+const Q=L.q;
+const app=document.getElementById("app");
+const KEY=`mc2-L${String(L.no).padStart(2,"0")}-${MODE}-v1`;
+const SKEY="mc2-student-v1";
+const lessonCode="L"+String(L.no).padStart(2,"0");
+const META={book:"時代華語 2",range:`第 ${L.no} 課`,title:`第${L.cn||L.no}課 完課測驗`,sub:L.title};
+
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const fmtDate=d=>`${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const blankify=s=>esc(s).replace(/＿＿/g,'<span class="blank"></span>');
+const orderAns=q=>[q.t.join("")].concat(q.alt||[]).map(a=>a+(q.p||"")).join("　或　");
+const isWide=q=>q.wide||q.o.some(o=>[...o].length>5);
+function ls(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k))}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+
+let store=(()=>{const s=ls(KEY);return s&&s.results?s:{results:{},tries:0,attempt:1,submitted:false}})();
+const save=()=>ls(KEY,store);
+let student=ls(SKEY)||null;
+let run=null;
+
+/* ---------- visuals ---------- */
+function clockSVG(h,m){
+  const ma=m*6,ha=(h%12)*30+m*0.5,rad=a=>(a-90)*Math.PI/180;
+  const hand=(a,len,w)=>`<line x1="60" y1="60" x2="${60+len*Math.cos(rad(a))}" y2="${60+len*Math.sin(rad(a))}" stroke-width="${w}"/>`;
+  let nums="";for(let n=1;n<=12;n++){const a=rad(n*30);nums+=`<text x="${60+44*Math.cos(a)}" y="${60+44*Math.sin(a)+4}" text-anchor="middle">${n}</text>`}
+  return`<svg class="clock" width="140" height="140" viewBox="0 0 120 120" role="img" aria-label="clock"><circle cx="60" cy="60" r="55"/>${nums}${hand(ha,26,4)}${hand(ma,40,2.5)}<circle cx="60" cy="60" r="3" style="fill:var(--ink);stroke:none"/></svg>`;
+}
+function passageHTML(P,cur){
+  if(P.html)return P.html;
+  let i=0;
+  const para=t=>esc(t).replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
+  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}</div>`;
+}
+function visualFor(q){
+  let v="";
+  if(q.clock)v+=clockSVG(...q.clock);
+  if(q.pic){const f=(L.pics||{})[q.pic];v+=typeof f==="function"?f():(f||"");}
+  if(q.html)v+=q.html;
+  if(q.passage){const P=L.passages[q.passage];v+=passageHTML(P,q.n);}
+  return v;
+}
+
+/* ---------- screens ---------- */
+function header(){
+  return`<header style="display:flex;flex-direction:column;gap:8px">
+    <div class="eyebrow">${META.book} · ${META.range}</div>
+    <h1>${META.title}</h1><div style="font-family:var(--f-han);font-size:1.2rem;color:var(--muted)">${esc(META.sub)}</div>
+  </header>`;
+}
+function home(){
+  if(MODE==="class"&&!student)return signin();
+  const done=SECTIONS.filter(s=>store.results[s.id]).length,all=done===SECTIONS.length;
+  const lede=MODE==="class"
+    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。`
+    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。`;
+  const locked=MODE==="class";
+  app.innerHTML=`${header()}
+  ${MODE==="class"?`<div class="who-bar"><span>${esc(student.klass)}　${esc(student.seat)}號　<b style="color:var(--ink)">${esc(student.name)}</b>${store.attempt>1?`　· 第 ${store.attempt} 次`:""}</span><button class="btn" id="chg" style="padding:4px 12px;font-size:.85rem">不是我</button></div>`:""}
+  <p class="lede">${lede}</p>
+  <div class="secs">${SECTIONS.map(s=>{const n=Q.filter(q=>q.s===s.id).length,r=store.results[s.id];
+    const dis=locked&&r&&!store.submitted?"disabled":"";
+    return`<button class="sec" data-s="${s.id}" ${dis}><span class="han">${s.han}</span>
+      <span><span class="t">${s.name}</span><br><span class="d">${esc(s.desc)}</span></span>
+      <span class="score">${r?`<b>${r.score}/${r.total}</b>${locked&&!store.submitted?"做完了":"已完成"}`:`<b>${n} 題</b>還沒做`}</span></button>`}).join("")}</div>
+  <div class="row">${MODE==="class"
+    ?(store.submitted?`<button class="btn primary" id="review">看答案和說明</button><button class="btn" id="retake">再考一次</button>`
+      :`<button class="btn primary" id="submit" ${done?"":"disabled"}>交卷</button>`)
+    :`<button class="btn primary" id="report" ${done?"":"disabled"}>看成績，傳給老師</button>`}</div>
+  <p class="note">${MODE==="class"
+    ?(store.submitted?"已經交卷了。":done?(all?"全部做完了，可以交卷了！":`已完成 ${done}/${SECTIONS.length} 部分。還沒做完也可以交卷，沒做的部分是 0 分。`):"從第一部分開始吧！")
+    :(done?`已完成 ${done}/${SECTIONS.length} 部分。`:"從第一部分開始吧！")+"可以重做，成績記最新的一次。"}</p>`;
+  app.querySelectorAll(".sec").forEach(b=>b.onclick=()=>{if(MODE==="class"&&store.submitted)return review(b.dataset.s);start(b.dataset.s)});
+  const g=id=>document.getElementById(id);
+  if(g("report"))g("report").onclick=report;
+  if(g("submit"))g("submit").onclick=()=>{if(!all&&!confirm("還有部分沒做完，確定要交卷嗎？"))return;submit()};
+  if(g("review"))g("review").onclick=()=>review();
+  if(g("retake"))g("retake").onclick=()=>{if(!confirm("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
+  if(g("chg"))g("chg").onclick=()=>{student=null;ls(SKEY,null);signin()};
+  window.scrollTo(0,0);
+}
+
+function signin(){
+  app.innerHTML=`${header()}
+  <div class="card">
+    <h2>請先寫你的資料</h2>
+    <div class="field"><label for="k">班級</label><input id="k" autocomplete="off" placeholder="例如：週一晚上班" value="${esc(CFG.DEFAULT_CLASS||"")}"></div>
+    <div class="field"><label for="s">座號／學號</label><input id="s" autocomplete="off" inputmode="numeric" placeholder="例如：7"></div>
+    <div class="field"><label for="n">姓名（中文名字）</label><input id="n" autocomplete="name" placeholder="例如：王美心"></div>
+    <div class="row"><button class="btn primary" id="go">開始</button></div>
+    <p class="note" id="err"></p>
+  </div>`;
+  document.getElementById("go").onclick=()=>{
+    const v=id=>document.getElementById(id).value.trim();
+    if(!v("k")||!v("s")||!v("n")){document.getElementById("err").textContent="三個都要寫喔！";return}
+    student={klass:v("k"),seat:v("s"),name:v("n")};ls(SKEY,student);home();
+  };
+}
+
+function start(sec,onlyIds){
+  let list=Q.filter(q=>q.s===sec&&(!onlyIds||onlyIds.includes(q.id)));
+  if(!FIXED.has(sec))list=shuffle(list);
+  run={sec,list,i:0,score:0,wrong:[],answers:{},retry:!!onlyIds,clozeDone:{},t0:Date.now()};
+  if(MODE==="class"&&!store.t0){store.t0=Date.now();save()}
+  show();
+}
+
+function show(){
+  const q=run.list[run.i],sec=SECTIONS.find(s=>s.id===run.sec),n=run.list.length;
+  let body;
+  const visual=visualFor(q);
+  const prompt=q.t?(q.q||"把詞語排成正確的句子。"):q.n?`空格（${q.n}）應該填什麼？${(q.q||"").replace(/^（\d+）/,"")}`:q.q;
+  if(q.t){
+    body=`${visual}<div class="q">${blankify(prompt)}</div>
+      <div class="slot" id="slot"><span class="ph">點下面的詞語 ↓</span></div>
+      <div class="pool" id="pool">${shuffleNot(q.t).map((w,k)=>`<button class="chip${w==="，"?" punct":""}" data-k="${k}">${esc(w)}</button>`).join("")}</div>
+      <div class="row"><button class="btn" id="clear">重來</button><button class="btn primary" id="check" disabled>${MODE==="class"?"確定":"檢查"}</button></div>
+      <div id="fb"></div>`;
+  }else{
+    run.opts=shuffle(q.o.map((t,k)=>({t,k})));
+    body=`${visual}<div class="q">${blankify(prompt)}</div>
+      <div class="opts ${isWide(q)?"wide":""}">${run.opts.map((o,k)=>`<button class="opt ${q.han===0?"":"han"}" data-k="${k}">${esc(o.t)}</button>`).join("")}</div>
+      <div id="fb"></div>`;
+  }
+  app.innerHTML=`<div class="bar"><button class="back" id="back">← 回目錄</button><div class="prog"><i style="width:${run.i/n*100}%"></i></div><span class="count">${run.i+1}/${n}</span></div>
+    <div class="eyebrow">${sec.name}${run.retry?" · 錯題練習":""}</div>
+    <div class="card">${body}</div>`;
+  document.getElementById("back").onclick=()=>{
+    if(MODE==="class"&&!store.submitted&&!confirm("現在離開，這個部分要重新開始。確定嗎？"))return;home()};
+  if(q.t)wireOrder(q);else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k,b));
+  const p=app.querySelector(".passage .cz.on");if(p)p.scrollIntoView({block:"nearest"});
+}
+function shuffleNot(t){let s;do{s=shuffle(t)}while(t.length>1&&s.join("")===t.join(""));run.pool=s;return s}
+
+function pick(k,btn){
+  const q=run.list[run.i],o=run.opts[k],ok=o.k===0;
+  if(MODE==="class"){
+    app.querySelectorAll(".opt").forEach(b=>b.classList.remove("chosen"));btn.classList.add("chosen");
+    run.pending={ok,given:o.t};
+    const fb=document.getElementById("fb");
+    if(!document.getElementById("next")){fb.innerHTML=nextBtn();wireNext()}
+    return;
+  }
+  app.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(run.opts[j].k===0)b.classList.add("right");else if(j===k)b.classList.add("wrong")});
+  record(q,ok,o.t,q.o[0]);
+}
+function nextBtn(){const last=run.i===run.list.length-1;return`<div class="row" style="justify-content:flex-end"><button class="btn primary" id="next">${last?"做完這部分":"下一題 →"}</button></div>`}
+function wireNext(){
+  const nx=document.getElementById("next");
+  nx.onclick=()=>{const q=run.list[run.i],p=run.pending;run.pending=null;
+    tally(q,p.ok,p.given,q.t?orderAns(q):q.o[0]);
+    if(q.passage&&q.n)run.clozeDone[q.n]=p.given;
+    advance()};
+}
+function wireOrder(q){
+  const slot=document.getElementById("slot"),pool=document.getElementById("pool"),check=document.getElementById("check");
+  let picked=[];
+  const draw=()=>{slot.innerHTML=picked.length?picked.map((k,j)=>`<button class="chip${run.pool[k]==="，"?" punct":""}" data-j="${j}">${esc(run.pool[k])}</button>`).join("")+`<span style="font-family:var(--f-han);font-size:1.3rem">${q.p||""}</span>`:`<span class="ph">點下面的詞語 ↓</span>`;
+    pool.querySelectorAll(".chip").forEach(b=>b.classList.toggle("used",picked.includes(+b.dataset.k)));
+    check.disabled=picked.length!==q.t.length;
+    slot.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{picked.splice(+b.dataset.j,1);draw()});};
+  pool.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const k=+b.dataset.k;if(!picked.includes(k)){picked.push(k);draw()}});
+  document.getElementById("clear").onclick=()=>{picked=[];draw()};
+  check.onclick=()=>{
+    const ans=picked.map(k=>run.pool[k]).join(""),right=q.t.join(""),ok=ans===right||(q.alt||[]).includes(ans);
+    if(MODE==="class"){run.pending={ok,given:ans+(q.p||"")};
+      slot.querySelectorAll(".chip").forEach(b=>b.disabled=true);pool.querySelectorAll(".chip").forEach(b=>b.disabled=true);
+      document.getElementById("clear").disabled=true;check.hidden=true;
+      document.getElementById("fb").innerHTML=nextBtn();wireNext();return}
+    slot.classList.add(ok?"ok":"no");
+    slot.querySelectorAll(".chip").forEach(b=>b.disabled=true);pool.querySelectorAll(".chip").forEach(b=>b.disabled=true);
+    document.getElementById("clear").disabled=true;check.hidden=true;
+    record(q,ok,ans+(q.p||""),orderAns(q));
+  };
+}
+function tally(q,ok,given,right){
+  if(ok)run.score++;else run.wrong.push({id:q.id,q:qLabel(q),given,right});
+  run.answers[q.id]={ok,given};
+}
+function qLabel(q){
+  if(q.t)return"排句子："+q.t.join(" / ");
+  let s=q.q;
+  if(q.passage&&q.n)s=`〈${L.passages[q.passage].title||"短文"}〉第（${q.n}）空`;
+  else if(q.passage)s=`〈${L.passages[q.passage].title||"閱讀"}〉${q.q}`;
+  return s;
+}
+function record(q,ok,given,right){
+  tally(q,ok,given,right);
+  if(q.passage&&q.n){run.clozeDone[q.n]=right;const P=L.passages[q.passage];const box=app.querySelector(".passage");if(box)box.outerHTML=passageHTML(P,q.n)}
+  const last=run.i===run.list.length-1;
+  document.getElementById("fb").innerHTML=`<div class="fb ${ok?"ok":"no"}"><b>${ok?"答對了！":"再想想。"}</b>${ok&&!(q.t&&q.alt)?"":`<p>${q.t&&q.alt?"這些都對":"正確答案"}：<b>${esc(right)}</b></p>`}${q.t&&q.alt?"":`<p>${esc(q.x||"")}</p>`}</div>
+    <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="btn primary" id="next">${last?"看這部分的成績":"下一題 →"}</button></div>`;
+  const nx=document.getElementById("next");nx.focus({preventScroll:true});
+  nx.onclick=advance;
+}
+function advance(){if(run.i===run.list.length-1)finish();else{run.i++;show()}}
+
+function finish(){
+  const sec=SECTIONS.find(s=>s.id===run.sec);
+  if(!run.retry){
+    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};
+  }else{
+    const r=store.results[run.sec];
+    if(r){const fixed=run.list.map(q=>q.id).filter(id=>!run.wrong.some(w=>w.id===id));r.fixed=[...new Set([...(r.fixed||[]),...fixed])]}
+  }
+  store.tries=(store.tries||0)+1;save();
+  if(MODE==="class"){
+    app.innerHTML=`<div class="eyebrow">${sec.name}</div><div class="card">
+      <h2>這個部分做完了！</h2><p class="lede">交卷以後才可以看答案。請回目錄，繼續做下一個部分。</p>
+      <div class="row"><button class="btn primary" id="home">回目錄</button></div></div>`;
+    document.getElementById("home").onclick=home;window.scrollTo(0,0);return;
+  }
+  const pct=Math.round(run.score/run.list.length*100);
+  app.innerHTML=`<div class="eyebrow">${sec.name}${run.retry?" · 錯題練習":""}</div>
+   <div class="card">
+    <div class="total">${run.score}<small> / ${run.list.length}</small></div>
+    <h2>${pct===100?"全對，太好了！":pct>=80?"很好！":pct>=60?"不錯，再練習一下。":"多複習，再做一次吧！"}</h2>
+    ${run.wrong.length?`<div><b>錯的題目</b><ul class="wrong-list">${run.wrong.map(w=>`<li>${esc(w.q)}　答案：<b>${esc(w.right)}</b></li>`).join("")}</ul></div>`:""}
+    <div class="row">
+      ${run.wrong.length?`<button class="btn" id="redo">只練錯的題</button>`:""}
+      <button class="btn" id="again">整個部分重做</button>
+      <button class="btn primary" id="home">回目錄</button>
+    </div>
+    ${run.retry?`<p class="note">錯題練習不會改掉第一次的分數，老師會看到你練習了哪些題。</p>`:""}
+   </div>`;
+  const ids=run.wrong.map(w=>w.id),s=run.sec;
+  if(ids.length)document.getElementById("redo").onclick=()=>start(s,ids);
+  document.getElementById("again").onclick=()=>start(s);
+  document.getElementById("home").onclick=home;
+  window.scrollTo(0,0);
+}
+
+function totals(){let sc=0,tt=0;SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;tt+=n;if(r)sc+=r.score});return{sc,tt}}
+function reportText(){
+  const lines=[`時代華語2 第${L.no}課 完課測驗（${L.title}）`,"時間："+fmtDate(new Date()),""];
+  if(MODE==="class"&&student)lines.splice(1,0,`${student.klass} ${student.seat}號 ${student.name}`);
+  let sc=0,tt=0;
+  SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;
+    if(r){sc+=r.score;tt+=r.total;lines.push(`${s.name}：${r.score}/${r.total}`)}else lines.push(`${s.name}：還沒做（${n}題）`)});
+  lines.push("",`總分：${sc}/${tt}`+(tt?`（${Math.round(sc/tt*100)}%）`:""));
+  if(MODE==="tutor")lines.push(`練習次數：${store.tries||0}`);
+  const wr=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wr.push(`・[${s.name}] ${w.q}　我選：${w.given}　答案：${w.right}${(r.fixed||[]).includes(w.id)?"（已訂正）":""}`))});
+  if(wr.length)lines.push("","錯題：",...wr);
+  return{text:lines.join("\n"),sc,tt};
+}
+
+function report(){
+  const {text,sc,tt}=reportText();
+  app.innerHTML=`<div class="bar"><button class="back" id="back">← 回目錄</button></div>
+  <header style="display:flex;flex-direction:column;gap:6px"><div class="eyebrow">成績</div><h1>你的成績</h1></header>
+  <div class="card">
+    <div class="total">${sc}<small> / ${tt}</small></div>
+    <table class="tbl">${SECTIONS.map(s=>{const r=store.results[s.id];return`<tr><td>${s.name}</td><td>${r?`${r.score}/${r.total}`:"還沒做"}</td></tr>`}).join("")}</table>
+  </div>
+  <div class="card">
+    <h2>傳給老師</h2>
+    <p class="note">按「複製」，再貼到你跟老師聊天的 App（LINE、WhatsApp、Zalo……）。</p>
+    <textarea id="rep" readonly>${esc(text)}</textarea>
+    <div class="row"><button class="btn primary" id="copy">複製</button><span id="msg" class="note" style="align-self:center"></span></div>
+  </div>`;
+  document.getElementById("back").onclick=home;
+  wireCopy(text);
+  window.scrollTo(0,0);
+}
+function wireCopy(text){
+  const ta=document.getElementById("rep"),msg=document.getElementById("msg");
+  document.getElementById("copy").onclick=()=>{
+    const fallback=()=>{ta.focus();ta.select();msg.textContent="已選取，請長按或按 Ctrl+C 複製。"};
+    try{navigator.clipboard.writeText(text).then(()=>{msg.textContent="已複製！"},fallback)}catch(e){fallback()}
+  };
+}
+
+/* ---------- class mode: submit + review ---------- */
+async function submit(){
+  const {text,sc,tt}=reportText();
+  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id];secs[s.name]=r?`${r.score}/${r.total}`:`0/${Q.filter(q=>q.s===s.id).length}`});
+  const wrong=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wrong.push(`[${s.name}] ${w.q} → ${w.given}（答案：${w.right}）`))});
+  const now=Date.now();
+  const payload={lesson:lessonCode,lessonTitle:`第${L.no}課 ${L.title}`,klass:student.klass,seat:student.seat,name:student.name,
+    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:SECTIONS.map(s=>s.name),
+    wrong:wrong.join("\n"),minutes:store.t0?Math.round((now-store.t0)/600)/100:"",submittedAt:new Date(now).toISOString()};
+  store.submitted=true;store.payload=payload;save();
+  app.innerHTML=`${header()}<div class="card"><div class="total">${sc}<small> / ${tt}</small></div>
+    <div id="st" class="status wait">正在把成績送給老師……</div>
+    <div class="row"><button class="btn primary" id="review" disabled>看答案和說明</button><button class="btn" id="home">回目錄</button></div></div>
+    <div class="card" id="bk" hidden><h2>備用：傳給老師</h2><p class="note">如果成績沒送出去，請按「複製」，貼給老師。</p><textarea id="rep" readonly>${esc(text)}</textarea>
+    <div class="row"><button class="btn primary" id="copy">複製</button><span id="msg" class="note" style="align-self:center"></span></div></div>`;
+  document.getElementById("home").onclick=home;
+  document.getElementById("review").onclick=()=>review();
+  wireCopy(text);
+  const st=document.getElementById("st"),bk=document.getElementById("bk");
+  const done=(ok,msg)=>{st.className="status "+(ok?"ok":"no");st.textContent=msg;document.getElementById("review").disabled=false;if(!ok)bk.hidden=false;store.sent=ok;save()};
+  if(!CFG.SCRIPT_URL||/PASTE|貼上/.test(CFG.SCRIPT_URL)){done(false,"老師還沒設定成績表，成績沒有送出。請用下面的「複製」傳給老師。");return}
+  const body=JSON.stringify(payload);
+  try{
+    const r=await fetch(CFG.SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
+    const j=await r.json().catch(()=>({ok:r.ok}));
+    if(j&&j.ok)done(true,"成績已經送給老師了！");else done(false,"成績沒有送出（"+((j&&j.error)||r.status)+"）。請用下面的「複製」傳給老師。");
+  }catch(e){
+    try{await fetch(CFG.SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
+      done(true,"成績已經送出了！（如果老師說沒收到，請用下面的「複製」再傳一次。）");bk.hidden=false;}
+    catch(e2){done(false,"網路有問題，成績沒有送出。請用下面的「複製」傳給老師。")}
+  }
+}
+function review(only){
+  run=null;
+  const secs=only?SECTIONS.filter(s=>s.id===only):SECTIONS;
+  const html=secs.map(s=>{const r=store.results[s.id]||{answers:{},score:0,total:Q.filter(q=>q.s===s.id).length};
+    const items=Q.filter(q=>q.s===s.id).map((q,i)=>{const a=r.answers[q.id];const right=q.t?orderAns(q):q.o[0];
+      const mark=a?(a.ok?'<span style="color:var(--ok)">✓</span>':'<span style="color:var(--bad)">✗</span>'):'<span style="color:var(--muted)">—</span>';
+      return`<li>${mark} ${esc(qLabel(q))}<br>${a&&!a.ok?`<span class="x">你的答案：${esc(a.given)}</span><br>`:""}<b>答案：${esc(right)}</b>${q.x?`<br><span class="x">${esc(q.x)}</span>`:""}</li>`}).join("");
+    return`<div class="card"><h2>${s.name}　<span style="font-size:1rem;color:var(--muted)">${r.score}/${r.total}</span></h2><ol class="wrong-list" style="list-style:none;padding:0">${items}</ol></div>`}).join("");
+  const ps=Object.entries(L.passages||{}).filter(([k,P])=>!P.html&&secs.some(s=>Q.some(q=>q.s===s.id&&q.passage===k)));
+  app.innerHTML=`<div class="bar"><button class="back" id="back">← 回目錄</button></div><h1>答案和說明</h1>${html}
+    ${ps.length?`<div class="card"><h2>短文</h2>${ps.map(([k,P])=>passageHTML(P)).join("")}</div>`:""}`;
+  document.getElementById("back").onclick=home;window.scrollTo(0,0);
+}
+
+/* class mode: if submitted earlier but never confirmed, offer resend */
+home();
+})();
+</script></body></html>
