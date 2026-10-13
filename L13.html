@@ -124,6 +124,8 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);border-radius:
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 .chip.punct{color:var(--bad);font-weight:700;min-width:2.8em;border-color:var(--bad)}
+.passage u.nw{text-decoration:underline 2px var(--warm);text-underline-offset:4px;font-weight:700}
+.nwnote{font-family:var(--f-body);font-size:.82rem;color:var(--warm);margin-top:4px}
 </style></head><body><div class="wrap" id="app"></div><script>window.MODE="class";</script><script src="config.js"></script><script>/* picture / practical-text builders used by lesson data files */
 window.P=(function(){
   const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -244,6 +246,19 @@ function ls(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k)
 
 let store=(()=>{const s=ls(KEY);return s&&s.results?s:{results:{},tries:0,attempt:1,submitted:false}})();
 const save=()=>ls(KEY,store);
+/* ---------- 作答紀錄：離開畫面、重新整理、中途回目錄、各部分時間 ---------- */
+const LOG=()=>{store.log=store.log||{away:0,awayMs:0,reload:0,quit:0,secMs:{}};return store.log};
+const inTest=()=>!!store.t0&&!(MODE==="class"&&store.submitted);
+let awayAt=0,asking=false;
+function goAway(){if(!asking&&inTest()&&!awayAt)awayAt=Date.now()}
+function comeBack(){if(awayAt){const d=Date.now()-awayAt;awayAt=0;if(d>1500){const l=LOG();l.away++;l.awayMs+=d;save()}}}
+document.addEventListener("visibilitychange",()=>{document.hidden?goAway():comeBack()});
+window.addEventListener("blur",goAway);window.addEventListener("focus",comeBack);
+const ask=m=>{asking=true;const r=confirm(m);asking=false;awayAt=0;return r};
+const dur=ms=>{const t=Math.round((ms||0)/1000),m=Math.floor(t/60),x=t%60;return m?`${m}分${x?x+"秒":""}`:`${x}秒`};
+const hhmm=t=>{const d=new Date(t);return`${pad(d.getHours())}:${pad(d.getMinutes())}`};
+if(inTest()){LOG().reload++;save()}
+
 let student=ls(SKEY)||null;
 let run=null;
 
@@ -257,8 +272,9 @@ function clockSVG(h,m){
 function passageHTML(P,cur){
   if(P.html)return P.html;
   let i=0;
-  const para=t=>esc(t).replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
-  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}</div>`;
+  const para=t=>esc(t).replace(/〔(.+?)〕/g,'<u class="nw">$1</u>').replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
+  const nw=P.body.some(t=>t.includes("〔"));
+  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}${nw?`<div class="nwnote">畫線的詞還沒學過，請從上下文猜猜看意思。</div>`:""}</div>`;
 }
 function visualFor(q){
   let v="";
@@ -280,8 +296,8 @@ function home(){
   if(MODE==="class"&&!student)return signin();
   const done=SECTIONS.filter(s=>store.results[s.id]).length,all=done===SECTIONS.length;
   const lede=MODE==="class"
-    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。`
-    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。`;
+    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。<br><b>注意：考試的時候請不要離開這個畫面或切換到別的 App，系統會記錄作答時間和離開的次數。</b>`
+    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。<br>（系統會記錄作答時間和離開畫面的次數，成績單上老師看得到。）`;
   const locked=MODE==="class";
   app.innerHTML=`${header()}
   ${MODE==="class"?`<div class="who-bar"><span>${esc(student.klass)}　${esc(student.seat)}號　<b style="color:var(--ink)">${esc(student.name)}</b>${store.attempt>1?`　· 第 ${store.attempt} 次`:""}</span><button class="btn" id="chg" style="padding:4px 12px;font-size:.85rem">不是我</button></div>`:""}
@@ -301,9 +317,9 @@ function home(){
   app.querySelectorAll(".sec").forEach(b=>b.onclick=()=>{if(MODE==="class"&&store.submitted)return review(b.dataset.s);start(b.dataset.s)});
   const g=id=>document.getElementById(id);
   if(g("report"))g("report").onclick=report;
-  if(g("submit"))g("submit").onclick=()=>{if(!all&&!confirm("還有部分沒做完，確定要交卷嗎？"))return;submit()};
+  if(g("submit"))g("submit").onclick=()=>{if(!all&&!ask("還有部分沒做完，確定要交卷嗎？"))return;submit()};
   if(g("review"))g("review").onclick=()=>review();
-  if(g("retake"))g("retake").onclick=()=>{if(!confirm("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
+  if(g("retake"))g("retake").onclick=()=>{if(!ask("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
   if(g("chg"))g("chg").onclick=()=>{student=null;ls(SKEY,null);signin()};
   window.scrollTo(0,0);
 }
@@ -329,7 +345,7 @@ function start(sec,onlyIds){
   let list=Q.filter(q=>q.s===sec&&(!onlyIds||onlyIds.includes(q.id)));
   if(!FIXED.has(sec))list=shuffle(list);
   run={sec,list,i:0,score:0,wrong:[],answers:{},retry:!!onlyIds,clozeDone:{},t0:Date.now()};
-  if(MODE==="class"&&!store.t0){store.t0=Date.now();save()}
+  if(!store.t0){store.t0=Date.now();save()}
   show();
 }
 
@@ -354,7 +370,7 @@ function show(){
     <div class="eyebrow">${sec.name}${run.retry?" · 錯題練習":""}</div>
     <div class="card">${body}</div>`;
   document.getElementById("back").onclick=()=>{
-    if(MODE==="class"&&!store.submitted&&!confirm("現在離開，這個部分要重新開始。確定嗎？"))return;home()};
+    if(MODE==="class"&&!store.submitted&&!ask("現在離開，這個部分要重新開始。確定嗎？"))return;if(!run.retry){LOG().quit++;save()}home()};
   if(q.t)wireOrder(q);else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k,b));
   const p=app.querySelector(".passage .cz.on");if(p)p.scrollIntoView({block:"nearest"});
 }
@@ -426,7 +442,7 @@ function advance(){if(run.i===run.list.length-1)finish();else{run.i++;show()}}
 function finish(){
   const sec=SECTIONS.find(s=>s.id===run.sec);
   if(!run.retry){
-    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};
+    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};LOG().secMs[run.sec]=(LOG().secMs[run.sec]||0)+(Date.now()-run.t0);
   }else{
     const r=store.results[run.sec];
     if(r){const fixed=run.list.map(q=>q.id).filter(id=>!run.wrong.some(w=>w.id===id));r.fixed=[...new Set([...(r.fixed||[]),...fixed])]}
@@ -458,15 +474,24 @@ function finish(){
   window.scrollTo(0,0);
 }
 
+function logLines(){
+  const l=LOG(),now=Date.now(),out=[];
+  if(store.t0)out.push(`開始時間：${hhmm(store.t0)}　作答時間：${dur(now-store.t0)}`);
+  out.push(`離開畫面：${l.away}次${l.away?`（共${dur(l.awayMs)}）`:""}`);
+  out.push(`重新整理／重開頁面：${l.reload}次`);
+  out.push(`中途回目錄：${l.quit}次`);
+  return out;
+}
 function totals(){let sc=0,tt=0;SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;tt+=n;if(r)sc+=r.score});return{sc,tt}}
 function reportText(){
   const lines=[`時代華語2 第${L.no}課 完課測驗（${L.title}）`,"時間："+fmtDate(new Date()),""];
   if(MODE==="class"&&student)lines.splice(1,0,`${student.klass} ${student.seat}號 ${student.name}`);
   let sc=0,tt=0;
   SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;
-    if(r){sc+=r.score;tt+=r.total;lines.push(`${s.name}：${r.score}/${r.total}`)}else lines.push(`${s.name}：還沒做（${n}題）`)});
+    tt+=n;const ms=LOG().secMs[s.id];if(r){sc+=r.score;lines.push(`${s.name}：${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`)}else lines.push(`${s.name}：還沒做（0/${n}）`)});
   lines.push("",`總分：${sc}/${tt}`+(tt?`（${Math.round(sc/tt*100)}%）`:""));
   if(MODE==="tutor")lines.push(`練習次數：${store.tries||0}`);
+  lines.push("","作答紀錄：",...logLines());
   const wr=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wr.push(`・[${s.name}] ${w.q}　我選：${w.given}　答案：${w.right}${(r.fixed||[]).includes(w.id)?"（已訂正）":""}`))});
   if(wr.length)lines.push("","錯題：",...wr);
   return{text:lines.join("\n"),sc,tt};
@@ -501,11 +526,16 @@ function wireCopy(text){
 /* ---------- class mode: submit + review ---------- */
 async function submit(){
   const {text,sc,tt}=reportText();
-  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id];secs[s.name]=r?`${r.score}/${r.total}`:`0/${Q.filter(q=>q.s===s.id).length}`});
+  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id],ms=LOG().secMs[s.id];secs[s.name]=r?`${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`:`0/${Q.filter(q=>q.s===s.id).length}（沒做）`});
+  const lg=LOG();
+  if(store.t0)secs["開始時間"]=hhmm(store.t0);
+  secs["離開畫面"]=`${lg.away}次${lg.away?`，共${dur(lg.awayMs)}`:""}`;
+  secs["重新整理"]=`${lg.reload}次`;
+  secs["中途回目錄"]=`${lg.quit}次`;
   const wrong=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wrong.push(`[${s.name}] ${w.q} → ${w.given}（答案：${w.right}）`))});
   const now=Date.now();
   const payload={lesson:lessonCode,lessonTitle:`第${L.no}課 ${L.title}`,klass:student.klass,seat:student.seat,name:student.name,
-    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:SECTIONS.map(s=>s.name),
+    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:Object.keys(secs),log:{start:store.t0?new Date(store.t0).toISOString():"",away:lg.away,awaySec:Math.round(lg.awayMs/1000),reload:lg.reload,quit:lg.quit},
     wrong:wrong.join("\n"),minutes:store.t0?Math.round((now-store.t0)/600)/100:"",submittedAt:new Date(now).toISOString()};
   store.submitted=true;store.payload=payload;save();
   app.innerHTML=`${header()}<div class="card"><div class="total">${sc}<small> / ${tt}</small></div>

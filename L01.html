@@ -124,6 +124,8 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);border-radius:
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 .chip.punct{color:var(--bad);font-weight:700;min-width:2.8em;border-color:var(--bad)}
+.passage u.nw{text-decoration:underline 2px var(--warm);text-underline-offset:4px;font-weight:700}
+.nwnote{font-family:var(--f-body);font-size:.82rem;color:var(--warm);margin-top:4px}
 </style></head><body><div class="wrap" id="app"></div><script>window.MODE="class";</script><script src="config.js"></script><script>/* picture / practical-text builders used by lesson data files */
 window.P=(function(){
   const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -141,7 +143,7 @@ desc:{gram:"V一下、最好、不但…也…、V完、V在、V給、一邊…�
 passages:{
  cz1:{title:"我的室友",body:["我的室友小林是日本人，他本來很［1］，不敢跟不熟的人說話。上個月學校有［2］，我請他一起去參加。","那天晚上，他［3］跳舞，［3］跟大家聊天，玩得很［4］。現在他不但認識了很多新朋友，也常常跟他們去打球。","他說：「［5］我的中文說得不太好，可是在台灣的生活真的很快樂！」"]},
  rd1:{html:P.chat("可欣 ↔ 美心",[["可欣","美心，妳星期六晚上有空嗎？學校有舞會，要不要一起去？"],["美心","我很想去，可是我那天得打工，九點才下班呢！",1],["可欣","沒關係，舞會從七點到十一點，妳下班以後再來吧。"],["美心","好啊！那我九點半到。我還可以帶我的室友去嗎？她剛來台灣，還沒有朋友。",1],["可欣","當然可以！人多更熱鬧。"]])},
- rd2:{title:"網路交朋友",body:["現在很多人都在網路上認識新朋友。在網路上聊天很方便，不但不用出門，也可以認識別的國家的人。我的同學大明就在網路上認識了一個法國朋友，他們每天一邊聊天，一邊互相學語言，大明的法文進步得很快。","可是在網路上交朋友也有危險。你不知道對方是不是真的跟他說的一樣。所以如果要跟網友見面，最好不要一個人去，也最好約在人多的地方，像咖啡廳或是百貨公司。","我也有網友，可是我們認識三個月了，還沒見過面。雖然我們聊得很愉快，可是我還是有一點兒害怕。我想，等我們再熟一點兒，我會請她跟她的朋友來參加我們學校的活動。"]}
+ rd2:{title:"網路交朋友",body:["現在很多人都在網路上認識新朋友。在網路上聊天很方便，不但不用出門，也可以認識別的國家的人。我的同學大明就在網路上認識了一個法國朋友，他們每天一邊聊天，一邊互相學語言，大明的法文進步得很快。","可是在網路上交朋友也有危險，因為你常常不知道對方是什麼樣的人。所以如果要跟〔陌生〕的網友見面，最好不要一個人去，也最好約在人多的地方，像咖啡廳或是百貨公司。","我也有網友，我們認識三個月了，可是還沒見過面。上個星期她問我要不要一起去喝咖啡，我〔猶豫〕了很久，最後還是說：「下次吧。」雖然我們聊得很愉快，可是我還是有一點兒害怕。我想，等我們再熟一點兒，我會請她跟她的朋友來參加我們學校的活動。"]}
 },
 pics:{
  back:()=>P.frames([["🧍","早上起來"],["😣","背很疼"],["🏥","？"]],{arrows:true}),
@@ -153,56 +155,56 @@ pics:{
  walk:()=>P.frames([["🚶‍♂️🚶‍♀️","晚上"],["🌳","公園"]])
 },
 q:[
- // 生詞
- {s:"vocab",id:"v1",q:"今天早上我七點就＿＿了，可是還是很想睡覺。",o:["起來","結束","散步","約會"],x:"起來＝起床（wake up）。"},
- {s:"vocab",id:"v2",q:"我的＿＿很疼，不能坐太久。",o:["背","心","舞會","個性"],x:"身體的部分：背、腳。背疼就不能坐太久。"},
- {s:"vocab",id:"v3",q:"感冒了，你可以去看醫生或是去＿＿買藥。",o:["藥房","動物園","舞會","宿舍"],x:"買藥的地方是「藥房／藥局」。"},
- {s:"vocab",id:"v4",q:"她說話很小聲，個性也很＿＿，大家都喜歡她。",o:["溫柔","危險","疼","幸運"],x:"溫柔：gentle，說人的個性。"},
- {s:"vocab",id:"v5",q:"晚上一個人走那條小路不太＿＿，你最好坐計程車回家。",o:["安全","愉快","客氣","害羞"],x:"一個人走小路可能有危險，就是「不安全」。"},
- {s:"vocab",id:"v6",q:"弟弟很＿＿狗，看到狗就跑。",o:["害怕","喜歡","溫柔","熟"],x:"看到狗就跑，因為「害怕」。"},
- {s:"vocab",id:"v7",q:"我不＿＿一個人去看醫生，你可以跟我一起去嗎？",o:["敢","最好","剛好","當然"],x:"敢＋V：dare to。「不敢」一個人去。"},
- {s:"vocab",id:"v8",q:"我要打電話給你的時候，你＿＿打來了。",o:["剛好","一直","不久","趕快"],x:"剛好：just, it happened that。"},
- {s:"vocab",id:"v9",q:"他很喜歡＿＿，常常說一些有趣的話，讓大家笑。",o:["開玩笑","散步","約會","結束"],x:"說有趣的話讓大家笑：開玩笑。"},
- {s:"vocab",id:"v10",q:"我跟他不太＿＿，不知道他喜歡吃什麼。",o:["熟","安全","危險","疼"],x:"熟：familiar（跟人很熟）。"},
- {s:"vocab",id:"v11",q:"弟弟今天＿＿在玩手機，都沒寫功課。",o:["一直","剛好","不久","當然"],x:"一直：all the time，從開始到現在都在做。"},
- {s:"vocab",id:"v12",q:"他買樂透中了一百萬，真＿＿！",o:["幸運","害羞","危險","客氣"],x:"中了一百萬，運氣很好：真幸運！"},
- {s:"vocab",id:"v13",q:"電影快開始了，我們＿＿走吧！",o:["趕快","一直","剛好","好像"],x:"趕快：馬上、快一點兒做。"},
- {s:"vocab",id:"v14",q:"他今天沒說話，＿＿不太高興。",o:["好像","當然","最好","不但"],x:"好像：seem，說自己的感覺、猜測。"},
+ // 生詞：新情境，多用第一冊學過的詞
+ {s:"vocab",id:"v1",q:"週末我都睡到十點才＿＿，然後跟朋友去吃早午餐。",o:["起來","結束","散步","約會"],x:"起來＝起床（wake up）。"},
+ {s:"vocab",id:"v2",q:"爸爸每天開八個小時的車，所以他的＿＿常常很疼。",o:["背","心","個性","舞會"],x:"身體的部分：背、腳。坐太久，背會很疼。"},
+ {s:"vocab",id:"v3",q:"晚上十點了，醫院已經關門，我只好去附近的＿＿買感冒藥。",o:["藥房","動物園","舞會","宿舍"],x:"買藥的地方是「藥房／藥局」。"},
+ {s:"vocab",id:"v4",q:"那位護理師說話很＿＿，小朋友看醫生的時候都不哭了。",o:["溫柔","危險","疼","幸運"],x:"溫柔：gentle，說人說話、做事的樣子。"},
+ {s:"vocab",id:"v5",q:"這條路晚上人很多，路燈也很亮，一個人走路也很＿＿。",o:["安全","害羞","客氣","疼"],x:"人多、有燈，不危險：安全。"},
+ {s:"vocab",id:"v6",q:"我妹妹很＿＿看醫生，一到醫院就哭。",o:["害怕","喜歡","溫柔","熟"],x:"一到醫院就哭，因為「害怕」。"},
+ {s:"vocab",id:"v7",q:"這家店的牛肉麵太辣了，我不＿＿吃。",o:["敢","最好","剛好","當然"],x:"敢＋V：dare to。"},
+ {s:"vocab",id:"v8",q:"我到車站的時候，公車＿＿來了，所以我一分鐘都沒等。",o:["剛好","一直","不久","趕快"],x:"剛好：just, it happened that。"},
+ {s:"vocab",id:"v9",q:"他說他會說二十種語言？他一定是在＿＿！",o:["開玩笑","散步","約會","結束"],x:"說不是真的、有趣的話：開玩笑。"},
+ {s:"vocab",id:"v10",q:"我剛來這個學校，跟班上的同學還不太＿＿。",o:["熟","安全","危險","疼"],x:"熟：familiar（跟人很熟）。"},
+ {s:"vocab",id:"v11",q:"從早上到現在，雨＿＿在下，沒停過。",o:["一直","剛好","不久","當然"],x:"一直：all the time，從開始到現在都這樣。"},
+ {s:"vocab",id:"v12",q:"我去得很晚，可是還買到了最後一張電影票，真＿＿！",o:["幸運","害羞","危險","客氣"],x:"運氣很好：幸運。"},
+ {s:"vocab",id:"v13",q:"你的手機快沒電了，＿＿打電話給媽媽吧！",o:["趕快","一直","剛好","好像"],x:"趕快：馬上、快一點兒做。"},
+ {s:"vocab",id:"v14",q:"天黑了，風也很大，＿＿要下雨了，我們回家吧。",o:["好像","當然","最好","不但"],x:"好像：seem，說自己的猜測。"},
  // 語法
- {s:"gram",id:"g1",q:"這個字怎麼念？你可以教＿＿嗎？",o:["我一下","一下我","我下一","下一我"],x:"V＋人＋一下：教我一下、等我一下。"},
- {s:"gram",id:"g2",q:"A：我好像發燒了。　B：你＿＿去看醫生。",o:["最好","好像","剛好","一直"],x:"最好＋VP：給別人建議。"},
- {s:"gram",id:"g3",q:"哪一句是對的？",o:["台灣的風景不但漂亮，小吃也很好吃。","台灣的風景不但漂亮，也小吃很好吃。","不但台灣的風景漂亮，也小吃很好吃。","台灣的風景也漂亮，不但小吃很好吃。"],x:"兩個主題不一樣：「也」要放在第二個主題（小吃）的後面。"},
- {s:"gram",id:"g4",q:"那件衣服不但好看，＿＿不貴。",o:["也","還是","可是","或是"],x:"不但……，也……。"},
- {s:"gram",id:"g5",q:"這本書我昨天就看＿＿了，現在借給你吧。",o:["完","在","給","好像"],x:"V完：動作結束了。看完了就可以借給別人。"},
- {s:"gram",id:"g6",q:"A：牛奶還有嗎？　B：昨天買的牛奶還沒喝＿＿，明天再買吧。",o:["完","給","在","一下"],x:"還沒＋V完：還有，沒有結束。"},
- {s:"gram",id:"g7",q:"我住＿＿捷運站附近，走路五分鐘就到了。",o:["在","給","完","到"],x:"V在＋地方：住在、坐在、站在。"},
- {s:"gram",id:"g8",q:"那些舊衣服，我都送＿＿朋友了。",o:["給","在","完","跟"],x:"V給＋人：送給、拿給、寄給、賣給。"},
- {s:"gram",id:"g9",q:"哪一句是對的？",o:["很多學生喜歡一邊聽音樂，一邊念書。","很多學生喜歡一邊聽音樂，也念書。","很多學生一邊喜歡聽音樂，念書一邊。","很多學生喜歡邊聽音樂，一邊邊念書。"],x:"(一)邊＋V1，(一)邊＋V2：兩個動作同時做。"},
- {s:"gram",id:"g10",q:"上課的時候，老師一邊說，學生＿＿寫。",o:["一邊","也","不但","就"],x:"兩個人也可以：老師一邊說，學生一邊寫。省略「一」只能用在同一個主語。"},
- {s:"gram",id:"g11",q:"＿＿中文很難，可是我覺得很有意思。",o:["雖然","不但","要是","因為"],x:"雖然……，可是……：後面跟前面想的不一樣。"},
- {s:"gram",id:"g12",q:"A：他家離你家很遠嗎？　B：不遠，他家離我家很近＿＿！",o:["呢","嗎","吧","了"],x:"句子最後的「呢！」：強調自己的看法，不是問問題。"},
- {s:"gram",id:"g13",q:"A：良介在做什麼？　B：他在洗澡＿＿！你等一下再來找他吧。",o:["呢","嗎","吧","的"],x:"「在V呢」：說明現在正在做的事。"},
+ {s:"gram",id:"g1",q:"這件外套很好看，我可以試＿＿嗎？",o:["一下","一點","一些","一起"],x:"V一下：時間很短。試一下、看一下、等一下。"},
+ {s:"gram",id:"g2",q:"A：我明天要去山上玩。　B：山上很冷，你＿＿多帶一件衣服。",o:["最好","好像","剛好","一直"],x:"最好＋VP：給別人建議。"},
+ {s:"gram",id:"g3",q:"哪一句是對的？",o:["這家餐廳不但菜很好吃，服務也很好。","這家餐廳不但菜很好吃，也服務很好。","不但這家餐廳菜很好吃，也服務很好。","這家餐廳菜也好吃，不但服務很好。"],x:"兩個主題不一樣（菜／服務）：「也」要放在第二個主題的後面。"},
+ {s:"gram",id:"g4",q:"我的室友不但會做飯，＿＿會做蛋糕。",o:["也","可是","所以","或是"],x:"不但……，也……。"},
+ {s:"gram",id:"g5",q:"這部電影很長，我看了三個小時才看＿＿。",o:["完","在","給","一下"],x:"V完：動作結束了。"},
+ {s:"gram",id:"g6",q:"A：你的功課寫好了嗎？　B：還沒寫＿＿，還有兩題。",o:["完","給","在","一下"],x:"還沒＋V完：還沒結束。"},
+ {s:"gram",id:"g7",q:"我的手機放＿＿哪裡了？我怎麼找不到？",o:["在","給","完","一下"],x:"V在＋地方：放在、住在、坐在。"},
+ {s:"gram",id:"g8",q:"這本字典是姐姐送＿＿我的生日禮物。",o:["給","在","完","跟"],x:"V給＋人：送給、寄給、賣給。"},
+ {s:"gram",id:"g9",q:"哪一句是對的？",o:["爸爸喜歡一邊吃早餐，一邊看新聞。","爸爸喜歡一邊吃早餐，也看新聞。","爸爸一邊喜歡吃早餐，看新聞一邊。","爸爸喜歡邊吃早餐，一邊一邊看新聞。"],x:"(一)邊＋V1，(一)邊＋V2：兩個動作同時做。"},
+ {s:"gram",id:"g10",q:"生日晚會上，哥哥一邊唱歌，弟弟＿＿跳舞。",o:["一邊","還是","不但","雖然"],x:"兩個人也可以：A一邊……，B一邊……。（兩個人的時候，「一」不能省。）"},
+ {s:"gram",id:"g11",q:"＿＿外面下大雨，可是他還是去跑步了。",o:["雖然","不但","最好","因為"],x:"雖然……，可是……：後面跟前面想的不一樣。"},
+ {s:"gram",id:"g12",q:"A：你吃飽了嗎？　B：還沒，我還很餓＿＿！",o:["呢","嗎","吧","了"],x:"句子最後的「呢！」：強調自己的情況，不是問問題。"},
+ {s:"gram",id:"g13",q:"A：可以跟你借一下筆嗎？　B：等一下，我在寫功課＿＿！",o:["呢","嗎","吧","的"],x:"「在V呢」：說明現在正在做的事。"},
  // 排句子
- {s:"order",id:"o1",t:["你","最好","去","藥房","買藥"],p:"。",alt:["最好你去藥房買藥"],x:"你最好去藥房買藥。"},
- {s:"order",id:"o2",t:["這家店的","麵包","下午三點","就","賣完了"],p:"。",alt:["下午三點這家店的麵包就賣完了"],x:"這家店的麵包下午三點就賣完了。"},
- {s:"order",id:"o3",t:["他","一邊","走路","，","一邊","玩手機"],p:"。",alt:["他一邊玩手機，一邊走路"],x:"他一邊走路，一邊玩手機。"},
- {s:"order",id:"o4",t:["這張卡片","是","我朋友","寄給","我","的"],p:"。",alt:["這張卡片是我寄給我朋友的"],x:"這張卡片是我朋友寄給我的。"},
- {s:"order",id:"o5",t:["她","不但","很漂亮","，","個性","也","很好"],p:"。",alt:["她不但個性很好，也很漂亮"],x:"她不但很漂亮，個性也很好。"},
- {s:"order",id:"o6",t:["孩子","坐在","椅子上","看書"],p:"。",x:"孩子坐在椅子上看書。"},
+ {s:"order",id:"o1",t:["你","最好","早一點兒","睡覺"],p:"。",alt:["最好你早一點兒睡覺"],x:"你最好早一點兒睡覺。"},
+ {s:"order",id:"o2",t:["我","還沒","看完","那本","書"],p:"。",x:"我還沒看完那本書。"},
+ {s:"order",id:"o3",t:["她","一邊","做飯","，","一邊","聽音樂"],p:"。",alt:["她一邊聽音樂，一邊做飯"],x:"她一邊做飯，一邊聽音樂。"},
+ {s:"order",id:"o4",t:["這些","照片","是","朋友","寄給","我","的"],p:"。",alt:["這些照片是我寄給朋友的"],x:"這些照片是朋友寄給我的。"},
+ {s:"order",id:"o5",t:["雖然","天氣","很冷","，","可是","他","還是","去游泳了"],p:"。",alt:["天氣雖然很冷，可是他還是去游泳了"],x:"雖然天氣很冷，可是他還是去游泳了。"},
+ {s:"order",id:"o6",t:["我的","手機","放在","桌子上","了"],p:"。",x:"我的手機放在桌子上了。"},
  // 看圖回答
- {s:"pic",id:"p1",pic:"back",q:"良介怎麼了？美心會跟他說什麼？",o:["你背疼，最好去看醫生。","你腳疼，最好在家休息。","你頭疼，最好去動物園。","你心跳得很快，最好去跳舞。"],x:"圖上是「背很疼」，下一張是醫院：最好去看醫生。"},
+ {s:"pic",id:"p1",pic:"back",q:"良介怎麼了？美心會跟他說什麼？",o:["你背很疼，最好去看醫生。","你腳很疼，最好在家休息。","你頭很疼，最好去動物園。","你心跳得很快，最好去跳舞。"],x:"圖上是「背很疼」，下一張是醫院：最好去看醫生。"},
  {s:"pic",id:"p2",pic:"dance",q:"他們在舞會做什麼？",o:["他們一邊跳舞，一邊聊天。","他們一邊散步，一邊唱歌。","他們一邊吃飯，一邊看書。","他們一邊打球，一邊聊天。"],x:"跳舞＋聊天：一邊跳舞，一邊聊天。"},
  {s:"pic",id:"p3",pic:"zoo",q:"他們在哪裡？",o:["他們在動物園。","他們在藥房。","他們在宿舍。","他們在博物館。"],x:"有猴子、老虎、大象的地方是動物園。"},
  {s:"pic",id:"p4",pic:"music",q:"哪一句跟圖一樣？",o:["她一邊聽音樂，一邊念書。","她聽完音樂，就去睡覺。","她一邊念書，一邊跳舞。","她不聽音樂，也不念書。"],x:"兩個動作同時做：一邊……一邊……。"},
  {s:"pic",id:"p5",pic:"soldout",q:"現在是下午兩點。哪一句是對的？",o:["現在買不到麵包了。","麵包店已經關門了。","麵包店下午三點開門。","明天麵包店不開。"],x:"「麵包賣完了」：還沒關門（三點才關），可是買不到了。"},
- {s:"pic",id:"p6",pic:"card",q:"這張卡片是誰寫給誰的？",o:["這張卡片是良介寫給美心的。","這張卡片是美心寫給良介的。","這張卡片是良介寫給他朋友的。","這張卡片是美心寫給她媽媽的。"],x:"「美心：」在上面（給誰），「良介 上」在下面（誰寫的）。"},
+ {s:"pic",id:"p6",pic:"card",q:"這張卡片，是誰給誰的？",o:["良介給美心的。","美心給良介的。","良介給他朋友的。","美心給她媽媽的。"],x:"「美心：」在上面（給誰），「良介 上」在下面（誰寫的）。"},
  {s:"pic",id:"p7",pic:"walk",q:"他們晚上做什麼？",o:["他們在公園散步。","他們在公園開玩笑。","他們在學校跳舞。","他們在動物園打球。"],x:"兩個人走路，旁邊有樹：在公園散步。"},
  // 短文填空
- {s:"cloze",id:"c1",passage:"cz1",n:1,q:"（1）",o:["害羞","幸運","溫柔","愉快"],x:"後面說「不敢跟不熟的人說話」，所以他本來很害羞。"},
- {s:"cloze",id:"c2",passage:"cz1",n:2,q:"（2）",o:["舞會","藥房","動物園","宿舍"],x:"後面說「那天晚上……跳舞」，所以是「舞會」。"},
- {s:"cloze",id:"c3",passage:"cz1",n:3,q:"（3）（兩個空格一樣）",o:["一邊","不但","雖然","剛好"],x:"一邊跳舞，一邊跟大家聊天。"},
- {s:"cloze",id:"c4",passage:"cz1",n:4,q:"（4）",o:["愉快","危險","害怕","疼"],x:"玩得很愉快：V得＋Vs。"},
- {s:"cloze",id:"c5",passage:"cz1",n:5,q:"（5）",o:["雖然","不但","要是","因為"],x:"雖然……，可是……。"},
+ {s:"cloze",id:"c1",passage:"cz1",n:1,o:["害羞","幸運","溫柔","愉快"],x:"後面說「不敢跟不熟的人說話」，所以他本來很害羞。"},
+ {s:"cloze",id:"c2",passage:"cz1",n:2,o:["舞會","藥房","動物園","宿舍"],x:"後面說「那天晚上……跳舞」，所以是「舞會」。"},
+ {s:"cloze",id:"c3",passage:"cz1",n:3,q:"（兩個空格一樣）",o:["一邊","不但","雖然","剛好"],x:"一邊跳舞，一邊跟大家聊天。"},
+ {s:"cloze",id:"c4",passage:"cz1",n:4,o:["愉快","危險","害怕","疼"],x:"玩得很愉快：V得＋Vs。"},
+ {s:"cloze",id:"c5",passage:"cz1",n:5,o:["雖然","不但","要是","因為"],x:"雖然……，可是……。"},
  // 閱讀理解
  {s:"read",id:"r1",passage:"rd1",q:"美心為什麼九點半才到舞會？",o:["因為她要打工，九點才下班。","因為舞會九點半才開始。","因為她要先去接室友。","因為她不喜歡跳舞。"],x:"「我那天得打工，九點才下班呢！」"},
  {s:"read",id:"r2",passage:"rd1",q:"舞會幾點結束？",o:["十一點","九點","九點半","七點"],x:"舞會從七點到十一點。"},
@@ -210,8 +212,10 @@ q:[
  {s:"read",id:"r4",passage:"rd2",q:"作者覺得在網路上聊天有什麼好處？",o:["不用出門，也可以認識別的國家的人。","不用花錢，也不會有危險。","可以每天見面。","可以很快找到工作。"],x:"「不但不用出門，也可以認識別的國家的人」。"},
  {s:"read",id:"r5",passage:"rd2",q:"大明的法文為什麼進步得很快？",o:["他每天跟法國網友一邊聊天，一邊互相學語言。","他去法國念書了。","他每天在網路上看法國電影。","他的法文老師很好。"],x:"「他們每天一邊聊天，一邊互相學語言」。"},
  {s:"read",id:"r6",passage:"rd2",q:"跟網友見面，作者覺得最好怎麼做？",o:["不要一個人去，約在人多的地方。","一個人去，約在對方家裡。","晚上見面比較安全。","見面以前不要聊天。"],x:"「最好不要一個人去，也最好約在人多的地方」。"},
- {s:"read",id:"r7",passage:"rd2",q:"作者跟他的網友怎麼樣了？",o:["認識三個月了，可是還沒見過面。","已經見過很多次面了。","他們聊得不愉快。","他們上個月一起去參加活動了。"],x:"「我們認識三個月了，還沒見過面」。"},
- {s:"read",id:"r8",passage:"rd2",q:"哪一句是對的？",o:["作者想等跟網友再熟一點兒，再請她來學校的活動。","作者覺得網路交朋友一點兒都不危險。","大明的網友是日本人。","作者不喜歡跟網友聊天。"],x:"最後一段：「等我們再熟一點兒，我會請她……來參加我們學校的活動」。"}
+ {s:"read",id:"r7",passage:"rd2",q:"第二段的「陌生」，意思最可能是什麼？",o:["不認識、不熟的","很漂亮的","很有錢的","年紀很大的"],x:"前面說「你常常不知道對方是什麼樣的人」，所以「陌生的網友」就是不認識、不熟的網友。"},
+ {s:"read",id:"r8",passage:"rd2",q:"「我猶豫了很久，最後還是說：『下次吧。』」「猶豫」最可能是什麼意思？",o:["不知道要不要去，想了很久","馬上就說好","覺得很生氣","覺得很高興"],x:"想了很久、最後才決定：猶豫＝拿不定主意。"},
+ {s:"read",id:"r9",passage:"rd2",q:"作者跟她的網友怎麼樣了？",o:["認識三個月了，可是還沒見過面。","已經見過很多次面了。","上個星期一起去喝咖啡了。","她們聊得不愉快。"],x:"「我們認識三個月了，可是還沒見過面」，她也沒去喝咖啡。"},
+ {s:"read",id:"r10",passage:"rd2",q:"哪一句是對的？",o:["作者想等跟網友再熟一點兒，再請她來學校的活動。","作者覺得網路交朋友一點兒都不危險。","大明的網友是日本人。","作者不喜歡跟網友聊天。"],x:"最後一句：「等我們再熟一點兒，我會請她……來參加我們學校的活動」。"}
 ]};
 </script><script>/* 時代華語2 完課測驗 engine — shared by the tutor (artifact) and class (GitHub) versions.
    MODE = "tutor" : instant feedback, redo wrong items, copy a report for the teacher.
@@ -249,6 +253,19 @@ function ls(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k)
 
 let store=(()=>{const s=ls(KEY);return s&&s.results?s:{results:{},tries:0,attempt:1,submitted:false}})();
 const save=()=>ls(KEY,store);
+/* ---------- 作答紀錄：離開畫面、重新整理、中途回目錄、各部分時間 ---------- */
+const LOG=()=>{store.log=store.log||{away:0,awayMs:0,reload:0,quit:0,secMs:{}};return store.log};
+const inTest=()=>!!store.t0&&!(MODE==="class"&&store.submitted);
+let awayAt=0,asking=false;
+function goAway(){if(!asking&&inTest()&&!awayAt)awayAt=Date.now()}
+function comeBack(){if(awayAt){const d=Date.now()-awayAt;awayAt=0;if(d>1500){const l=LOG();l.away++;l.awayMs+=d;save()}}}
+document.addEventListener("visibilitychange",()=>{document.hidden?goAway():comeBack()});
+window.addEventListener("blur",goAway);window.addEventListener("focus",comeBack);
+const ask=m=>{asking=true;const r=confirm(m);asking=false;awayAt=0;return r};
+const dur=ms=>{const t=Math.round((ms||0)/1000),m=Math.floor(t/60),x=t%60;return m?`${m}分${x?x+"秒":""}`:`${x}秒`};
+const hhmm=t=>{const d=new Date(t);return`${pad(d.getHours())}:${pad(d.getMinutes())}`};
+if(inTest()){LOG().reload++;save()}
+
 let student=ls(SKEY)||null;
 let run=null;
 
@@ -262,8 +279,9 @@ function clockSVG(h,m){
 function passageHTML(P,cur){
   if(P.html)return P.html;
   let i=0;
-  const para=t=>esc(t).replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
-  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}</div>`;
+  const para=t=>esc(t).replace(/〔(.+?)〕/g,'<u class="nw">$1</u>').replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
+  const nw=P.body.some(t=>t.includes("〔"));
+  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}${nw?`<div class="nwnote">畫線的詞還沒學過，請從上下文猜猜看意思。</div>`:""}</div>`;
 }
 function visualFor(q){
   let v="";
@@ -285,8 +303,8 @@ function home(){
   if(MODE==="class"&&!student)return signin();
   const done=SECTIONS.filter(s=>store.results[s.id]).length,all=done===SECTIONS.length;
   const lede=MODE==="class"
-    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。`
-    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。`;
+    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。<br><b>注意：考試的時候請不要離開這個畫面或切換到別的 App，系統會記錄作答時間和離開的次數。</b>`
+    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。<br>（系統會記錄作答時間和離開畫面的次數，成績單上老師看得到。）`;
   const locked=MODE==="class";
   app.innerHTML=`${header()}
   ${MODE==="class"?`<div class="who-bar"><span>${esc(student.klass)}　${esc(student.seat)}號　<b style="color:var(--ink)">${esc(student.name)}</b>${store.attempt>1?`　· 第 ${store.attempt} 次`:""}</span><button class="btn" id="chg" style="padding:4px 12px;font-size:.85rem">不是我</button></div>`:""}
@@ -306,9 +324,9 @@ function home(){
   app.querySelectorAll(".sec").forEach(b=>b.onclick=()=>{if(MODE==="class"&&store.submitted)return review(b.dataset.s);start(b.dataset.s)});
   const g=id=>document.getElementById(id);
   if(g("report"))g("report").onclick=report;
-  if(g("submit"))g("submit").onclick=()=>{if(!all&&!confirm("還有部分沒做完，確定要交卷嗎？"))return;submit()};
+  if(g("submit"))g("submit").onclick=()=>{if(!all&&!ask("還有部分沒做完，確定要交卷嗎？"))return;submit()};
   if(g("review"))g("review").onclick=()=>review();
-  if(g("retake"))g("retake").onclick=()=>{if(!confirm("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
+  if(g("retake"))g("retake").onclick=()=>{if(!ask("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
   if(g("chg"))g("chg").onclick=()=>{student=null;ls(SKEY,null);signin()};
   window.scrollTo(0,0);
 }
@@ -334,7 +352,7 @@ function start(sec,onlyIds){
   let list=Q.filter(q=>q.s===sec&&(!onlyIds||onlyIds.includes(q.id)));
   if(!FIXED.has(sec))list=shuffle(list);
   run={sec,list,i:0,score:0,wrong:[],answers:{},retry:!!onlyIds,clozeDone:{},t0:Date.now()};
-  if(MODE==="class"&&!store.t0){store.t0=Date.now();save()}
+  if(!store.t0){store.t0=Date.now();save()}
   show();
 }
 
@@ -359,7 +377,7 @@ function show(){
     <div class="eyebrow">${sec.name}${run.retry?" · 錯題練習":""}</div>
     <div class="card">${body}</div>`;
   document.getElementById("back").onclick=()=>{
-    if(MODE==="class"&&!store.submitted&&!confirm("現在離開，這個部分要重新開始。確定嗎？"))return;home()};
+    if(MODE==="class"&&!store.submitted&&!ask("現在離開，這個部分要重新開始。確定嗎？"))return;if(!run.retry){LOG().quit++;save()}home()};
   if(q.t)wireOrder(q);else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k,b));
   const p=app.querySelector(".passage .cz.on");if(p)p.scrollIntoView({block:"nearest"});
 }
@@ -431,7 +449,7 @@ function advance(){if(run.i===run.list.length-1)finish();else{run.i++;show()}}
 function finish(){
   const sec=SECTIONS.find(s=>s.id===run.sec);
   if(!run.retry){
-    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};
+    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};LOG().secMs[run.sec]=(LOG().secMs[run.sec]||0)+(Date.now()-run.t0);
   }else{
     const r=store.results[run.sec];
     if(r){const fixed=run.list.map(q=>q.id).filter(id=>!run.wrong.some(w=>w.id===id));r.fixed=[...new Set([...(r.fixed||[]),...fixed])]}
@@ -463,15 +481,24 @@ function finish(){
   window.scrollTo(0,0);
 }
 
+function logLines(){
+  const l=LOG(),now=Date.now(),out=[];
+  if(store.t0)out.push(`開始時間：${hhmm(store.t0)}　作答時間：${dur(now-store.t0)}`);
+  out.push(`離開畫面：${l.away}次${l.away?`（共${dur(l.awayMs)}）`:""}`);
+  out.push(`重新整理／重開頁面：${l.reload}次`);
+  out.push(`中途回目錄：${l.quit}次`);
+  return out;
+}
 function totals(){let sc=0,tt=0;SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;tt+=n;if(r)sc+=r.score});return{sc,tt}}
 function reportText(){
   const lines=[`時代華語2 第${L.no}課 完課測驗（${L.title}）`,"時間："+fmtDate(new Date()),""];
   if(MODE==="class"&&student)lines.splice(1,0,`${student.klass} ${student.seat}號 ${student.name}`);
   let sc=0,tt=0;
   SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;
-    if(r){sc+=r.score;tt+=r.total;lines.push(`${s.name}：${r.score}/${r.total}`)}else lines.push(`${s.name}：還沒做（${n}題）`)});
+    tt+=n;const ms=LOG().secMs[s.id];if(r){sc+=r.score;lines.push(`${s.name}：${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`)}else lines.push(`${s.name}：還沒做（0/${n}）`)});
   lines.push("",`總分：${sc}/${tt}`+(tt?`（${Math.round(sc/tt*100)}%）`:""));
   if(MODE==="tutor")lines.push(`練習次數：${store.tries||0}`);
+  lines.push("","作答紀錄：",...logLines());
   const wr=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wr.push(`・[${s.name}] ${w.q}　我選：${w.given}　答案：${w.right}${(r.fixed||[]).includes(w.id)?"（已訂正）":""}`))});
   if(wr.length)lines.push("","錯題：",...wr);
   return{text:lines.join("\n"),sc,tt};
@@ -506,11 +533,16 @@ function wireCopy(text){
 /* ---------- class mode: submit + review ---------- */
 async function submit(){
   const {text,sc,tt}=reportText();
-  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id];secs[s.name]=r?`${r.score}/${r.total}`:`0/${Q.filter(q=>q.s===s.id).length}`});
+  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id],ms=LOG().secMs[s.id];secs[s.name]=r?`${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`:`0/${Q.filter(q=>q.s===s.id).length}（沒做）`});
+  const lg=LOG();
+  if(store.t0)secs["開始時間"]=hhmm(store.t0);
+  secs["離開畫面"]=`${lg.away}次${lg.away?`，共${dur(lg.awayMs)}`:""}`;
+  secs["重新整理"]=`${lg.reload}次`;
+  secs["中途回目錄"]=`${lg.quit}次`;
   const wrong=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wrong.push(`[${s.name}] ${w.q} → ${w.given}（答案：${w.right}）`))});
   const now=Date.now();
   const payload={lesson:lessonCode,lessonTitle:`第${L.no}課 ${L.title}`,klass:student.klass,seat:student.seat,name:student.name,
-    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:SECTIONS.map(s=>s.name),
+    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:Object.keys(secs),log:{start:store.t0?new Date(store.t0).toISOString():"",away:lg.away,awaySec:Math.round(lg.awayMs/1000),reload:lg.reload,quit:lg.quit},
     wrong:wrong.join("\n"),minutes:store.t0?Math.round((now-store.t0)/600)/100:"",submittedAt:new Date(now).toISOString()};
   store.submitted=true;store.payload=payload;save();
   app.innerHTML=`${header()}<div class="card"><div class="total">${sc}<small> / ${tt}</small></div>

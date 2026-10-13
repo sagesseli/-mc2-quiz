@@ -7,6 +7,9 @@
  *   「作答紀錄」：每一次交卷一列（含各大題分數、錯題、作答時間、第幾次）
  */
 
+// 成績要寫進的試算表（國專G春季班 成績）
+const SHEET_ID = "1I2iHmCFYk8I2q--oeE5jNKpaohiScpP4YPJLxzGneoc";
+
 // 成績冊要記哪一次的分數："first"＝第一次、"best"＝最高分、"latest"＝最後一次
 const SCORE_POLICY = "first";
 
@@ -19,7 +22,7 @@ function doPost(e) {
   lock.waitLock(20000);
   try {
     const d = JSON.parse(e.postData.contents);
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = SpreadsheetApp.openById(SHEET_ID);
     const log = sheet_(ss, LOG_SHEET, LOG_HEAD);
     const secText = (d.sectionOrder || Object.keys(d.sections || {}))
       .map(k => k + " " + d.sections[k]).join("｜");

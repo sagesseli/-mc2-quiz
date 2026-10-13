@@ -124,6 +124,8 @@ textarea{width:100%;min-height:200px;border:1px solid var(--line);border-radius:
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 .chip.punct{color:var(--bad);font-weight:700;min-width:2.8em;border-color:var(--bad)}
+.passage u.nw{text-decoration:underline 2px var(--warm);text-underline-offset:4px;font-weight:700}
+.nwnote{font-family:var(--f-body);font-size:.82rem;color:var(--warm);margin-top:4px}
 </style></head><body><div class="wrap" id="app"></div><script>window.MODE="class";</script><script src="config.js"></script><script>/* picture / practical-text builders used by lesson data files */
 window.P=(function(){
   const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -141,7 +143,7 @@ desc:{gram:"就（強調）、V到、V懂、V得起／V不起、V飽、Vs得不�
 passages:{
  cz1:{title:"第一次逛夜市",body:["上個週末，我跟室友第一次去逛夜市。夜市裡人很多，［1］得不得了。那裡有［2］小吃，臭豆腐、雞排、蚵仔煎……，我都想吃吃看。","我們先買了一份雞排，又大又香，好吃［3］了！可是我買的珍珠奶茶太甜了，我不［4］喝太甜的飲料，下次要選半糖的。","夜市的東西都很便宜，學生也吃得［5］。我們吃得很飽，也買了兩件衣服。我覺得逛夜市真有意思，下次還要再去。"]},
  rd1:{html:P.sign("🧋 阿珍飲料店　菜單",[["珍珠奶茶（中杯）","50 元"],["珍珠奶茶（大杯）","65 元"],["香蕉牛奶","60 元"],["芒果冰沙","80 元"],["西瓜汁","55 元"],"~甜度：正常／半糖／微糖／無糖　　冰塊：正常／少冰／去冰","~★ 買兩杯，第二杯半價（不包括芒果冰沙）","~營業時間：下午 5:00 ～ 半夜 12:00，星期一休息"],{warm:true})},
- rd2:{title:"逛夜市，學文化",body:["來台灣旅遊的外國遊客越來越多，很多人都說，到台灣一定要去逛夜市。一般的夜市大概從晚上六點開始，到半夜才結束。週末的時候，夜市裡的人更多，擠得不得了。","夜市的小吃做法簡單，價錢也便宜，誰都吃得起。天氣熱的時候，排隊買芒果冰的人特別多。除了吃東西以外，夜市也有很多好玩的遊戲和流行的衣服。買東西的時候，你還可以跟老闆講價。","我的朋友馬克來自德國，他本來對台灣文化沒有什麼興趣。可是上次我帶他去士林夜市以後，他越來越喜歡台灣了。他說，他雖然看不懂招牌上的中文，可是用手指一指，老闆就懂了。他最喜歡的是臭豆腐，他說：「聞起來很臭，吃起來好吃極了！」","現在馬克開始學中文了。他說，他希望下次來夜市的時候，看得懂菜單，也能自己跟老闆殺價。"]}
+ rd2:{title:"馬克的夜市日記",body:["馬克是德國人，去年來台灣念書。剛來的時候，他沒有台灣朋友，每天下課就回宿舍，生活有一點兒無聊。後來他的室友帶他去逛夜市，他就愛上了台灣。","夜市裡有幾百個〔攤販〕，有的賣吃的，有的賣衣服和鞋子。馬克說，最有意思的是，同一種小吃，每一家的做法和味道都不一樣，所以他每次去都要買好幾家，比比看哪一家最好吃。一個晚上花兩百塊，就吃得很飽了。","馬克看不懂招牌上的中文，可是他一點兒都不著急。他用手指一指，再笑一笑，老闆就懂了，有時候老闆還會多給他一點兒。他最喜歡的是臭豆腐，他說：「聞起來很臭，可是吃起來香極了！」","這個月馬克就要回德國了。離開台灣的前一天晚上，他又去了一次夜市，說他很〔捨不得〕走。他已經開始學中文了，希望下次來台灣的時候，看得懂菜單，也能自己跟老闆殺價。"]}
 },
 pics:{
  tofu:()=>P.frames([["🤢","聞起來"],["😋","吃起來"]]),
@@ -154,38 +156,42 @@ pics:{
  exit:()=>P.sign("捷運 圓山站",["⬅ 1號出口　　2號出口 ➡","~花博公園　　　　　士林夜市 🏮"],{left:false})
 },
 q:[
- {s:"vocab",id:"v1",q:"我晚上常常跟朋友去＿＿夜市。",o:["逛","選","聞","加"],x:"逛夜市、逛街、逛百貨公司。"},
- {s:"vocab",id:"v2",q:"我們在吃飯的時候，＿＿停電了。",o:["忽然","其實","平常","大概"],x:"忽然：suddenly。"},
- {s:"vocab",id:"v3",q:"在夜市買衣服，可以跟老闆＿＿。",o:["殺價","推薦","討厭","習慣"],x:"殺價／講價：請老闆便宜一點兒。"},
- {s:"vocab",id:"v4",q:"這家店的＿＿上有英文和日文，外國遊客也看得懂。",o:["招牌","冰塊","點心","出口"],x:"招牌：商店門口寫名字的牌子。"},
- {s:"vocab",id:"v5",q:"你可以＿＿我一家好吃的餐廳嗎？",o:["推薦","討厭","殺價","聞"],x:"推薦：recommend。"},
- {s:"vocab",id:"v6",q:"這個菜看起來很辣，＿＿一點兒都不辣。",o:["其實","忽然","平常","特別是"],x:"其實：actually，跟看起來的不一樣。"},
- {s:"vocab",id:"v7",q:"我＿＿下雨天，因為出去玩很不方便。",o:["討厭","推薦","習慣","值得"],x:"討厭：不喜歡。"},
- {s:"vocab",id:"v8",q:"週末的夜市人很多，非常＿＿。",o:["熱鬧","無聊","簡單","常見"],x:"熱鬧：人多、很有活力。"},
- {s:"vocab",id:"v9",q:"這個電視節目很＿＿，我們去看電影吧。",o:["無聊","熱鬧","值得","辣"],x:"無聊：boring。"},
- {s:"vocab",id:"v10",q:"這家店的牛肉麵又便宜又好吃，＿＿很好，每天都要排隊。",o:["生意","價錢","做法","文化"],x:"生意好：很多客人。"},
- {s:"vocab",id:"v11",q:"這本小說很有意思，＿＿一看。",o:["值得","討厭","習慣","流行"],x:"值得：worth。"},
- {s:"vocab",id:"v12",q:"我每天早上＿＿六點起床，有時候六點半。",o:["大概","忽然","其實","剛"],x:"大概：about，不是很確定的時間。"},
- {s:"vocab",id:"v13",q:"我的飲料不要＿＿糖和冰塊，謝謝。",o:["加","選","聞","試"],x:"加糖、加冰塊。"},
- {s:"vocab",id:"v14",q:"你＿＿，這是什麼味道？好香啊！",o:["聞","看","推薦","選"],x:"用鼻子：聞。"},
- {s:"gram",id:"g1",q:"A：我的筆在哪裡？　B：你的筆＿＿在桌上啊！",o:["就","才","又","都"],x:"就＋在：強調「就在這裡」，很近、很清楚。"},
- {s:"gram",id:"g2",q:"我找了很久，可是找＿＿我的錢包，怎麼辦？",o:["不到","不懂","不起","不飽"],x:"V不到：沒辦法找到。"},
- {s:"gram",id:"g3",q:"我＿＿想到那個外國人會說中文！",o:["沒","不","沒有了","不會"],x:"沒想到：didn't expect。"},
- {s:"gram",id:"g4",q:"他寫的英文信，我看不＿＿。",o:["懂","到","起","飽"],x:"看不懂：看了，可是不明白。"},
- {s:"gram",id:"g5",q:"那件衣服太貴了，我怎麼買得＿＿？",o:["起","到","懂","飽"],x:"買得起／買不起：有沒有錢買。"},
- {s:"gram",id:"g6",q:"你只吃了半碗飯，怎麼吃得＿＿呢？",o:["飽","起","懂","到"],x:"吃得飽／吃不飽。"},
- {s:"gram",id:"g7",q:"哪一句是對的？",o:["台北101高得不得了。","台北101很高得不得了。","台北101不得了高。","台北101高不得了得。"],x:"Vs＋得不得了。前面不加「很」。"},
- {s:"gram",id:"g8",q:"哪一句是對的？",o:["他的房間乾淨極了！","他的房間非常乾淨極了！","他的房間極了乾淨！","他的房間乾淨得極了！"],x:"Vs＋極了。前面不加「很、非常」，也不加「得」。"},
- {s:"gram",id:"g9",q:"來台灣旅遊的外國人＿＿多了。",o:["越來越","越越","比較","更"],x:"越來越＋Vs：一直在改變。"},
- {s:"gram",id:"g10",q:"弟弟只＿＿數學有興趣，其他的都沒興趣。",o:["對","跟","給","替"],x:"S＋對＋N／V＋有興趣。"},
- {s:"gram",id:"g11",q:"哪一句是對的？",o:["陳小姐對逛百貨公司很有興趣。","陳小姐對逛百貨公司很興趣。","陳小姐有興趣對逛百貨公司。","陳小姐對很有興趣逛百貨公司。"],x:"對＋N＋（很）有興趣。「有」不能少。"},
- {s:"gram",id:"g12",q:"台北101離這裡有一點兒遠，你十五分鐘走得到走＿＿？",o:["不到","沒到","不起","不懂"],x:"V得到V不到？：問能不能。"},
- {s:"order",id:"o1",t:["我","看不懂","他","寫的","英文信"],p:"。",alt:["他寫的英文信我看不懂"],x:"我看不懂他寫的英文信。"},
- {s:"order",id:"o2",t:["台灣小吃","的價錢","很便宜","，","誰都","吃得起"],p:"。",x:"台灣小吃的價錢很便宜，誰都吃得起。"},
- {s:"order",id:"o3",t:["他","累得","不得了","，","一回家","就睡了"],p:"。",x:"他累得不得了，一回家就睡了。"},
- {s:"order",id:"o4",t:["阮先生","越來越","了解","台灣的文化","了"],p:"。",x:"阮先生越來越了解台灣的文化了。"},
- {s:"order",id:"o5",t:["我","對","台灣的歷史","很有興趣"],p:"。",x:"我對台灣的歷史很有興趣。"},
- {s:"order",id:"o6",t:["在台灣","到處","都","吃得到","小吃"],p:"。",alt:["小吃在台灣到處都吃得到"],x:"在台灣，到處都吃得到小吃。"},
+ // 生詞：新情境＋第一～三課學過的詞
+ {s:"vocab",id:"v1",q:"我室友最愛＿＿街了，每個週末都去百貨公司。",o:["逛","選","聞","加"],x:"逛街、逛夜市、逛百貨公司。"},
+ {s:"vocab",id:"v2",q:"我們在公園散步的時候，＿＿下雨了，大家都跑進便利商店裡。",o:["忽然","其實","平常","大概"],x:"忽然：suddenly，沒想到馬上發生。"},
+ {s:"vocab",id:"v3",q:"在市場買水果的時候，奶奶總是跟老闆＿＿，常常可以便宜二十塊。",o:["殺價","推薦","討厭","習慣"],x:"殺價：請老闆算便宜一點兒。"},
+ {s:"vocab",id:"v4",q:"那家小吃店的＿＿很大，從很遠的地方就看得到店的名字。",o:["招牌","冰塊","點心","出口"],x:"招牌：店門口寫店名的牌子。"},
+ {s:"vocab",id:"v5",q:"我想找一家安靜的咖啡廳念書，你可以＿＿一家嗎？",o:["推薦","討厭","殺價","聞"],x:"推薦：recommend。"},
+ {s:"vocab",id:"v6",q:"他看起來很害怕，＿＿他一點兒都不怕，只是在跟我們開玩笑。",o:["其實","忽然","平常","大概"],x:"其實：actually，真的情況跟看起來的不一樣。"},
+ {s:"vocab",id:"v7",q:"我很＿＿住在太吵的地方，所以下個月要搬家了。",o:["討厭","推薦","習慣","值得"],x:"討厭：很不喜歡。"},
+ {s:"vocab",id:"v8",q:"過年的時候，街上到處都是人，非常＿＿。",o:["熱鬧","無聊","簡單","常見"],x:"熱鬧：人多、有很多活動。"},
+ {s:"vocab",id:"v9",q:"這部電影的故事很＿＿，我看了十分鐘就想走了。",o:["無聊","熱鬧","值得","辣"],x:"無聊：boring。"},
+ {s:"vocab",id:"v10",q:"那家早餐店又便宜又好吃，＿＿非常好，早上七點就坐滿了客人。",o:["生意","價錢","做法","文化"],x:"生意很好：客人很多。"},
+ {s:"vocab",id:"v11",q:"那個博物館很有意思，很＿＿去看看。",o:["值得","討厭","習慣","流行"],x:"值得＋V：worth doing。"},
+ {s:"vocab",id:"v12",q:"A：從這裡走到捷運站要多久？　B：＿＿十分鐘吧。",o:["大概","忽然","其實","剛"],x:"大概：about，不太確定的數字。"},
+ {s:"vocab",id:"v13",q:"這杯咖啡沒什麼味道，我想＿＿一點兒牛奶。",o:["加","選","聞","試"],x:"加：put in, add。"},
+ {s:"vocab",id:"v14",q:"廚房裡是什麼味道？你＿＿，好像是媽媽在做蛋糕。",o:["聞","殺價","推薦","選"],x:"用鼻子知道味道：聞。"},
+ // 語法
+ {s:"gram",id:"g1",q:"A：請問捷運站在哪裡？　B：捷運站＿＿在便利商店旁邊，你看，那裡！",o:["就","才","又","都"],x:"就＋在：強調「就是那裡」，很近、很清楚。"},
+ {s:"gram",id:"g2",q:"我上網找了好幾個星期，還是找＿＿便宜的公寓。",o:["不到","不懂","不起","不飽"],x:"V不到：找了，可是沒有結果。"},
+ {s:"gram",id:"g3",q:"我＿＿想到這家小店的牛肉麵這麼好吃！",o:["沒","不","沒有了","不會"],x:"沒想到：didn't expect。"},
+ {s:"gram",id:"g4",q:"老師說話的聲音很大，可是用了很多很難的詞，我還是聽不＿＿。",o:["懂","到","起","飽"],x:"聽得到，可是不明白：聽不懂。"},
+ {s:"gram",id:"g5",q:"學校旁邊那間套房每個月要兩萬五，我只是學生，怎麼租得＿＿？",o:["起","到","懂","飽"],x:"V得起／V不起：有沒有錢做。"},
+ {s:"gram",id:"g6",q:"這家餐廳的菜很少，我吃了兩盤還是沒吃＿＿。",o:["飽","起","懂","到"],x:"吃飽／沒吃飽。"},
+ {s:"gram",id:"g7",q:"哪一句是對的？",o:["搬家那天，我累得不得了。","搬家那天，我很累得不得了。","搬家那天，我不得了累。","搬家那天，我累不得了得。"],x:"Vs＋得不得了。前面不加「很」。"},
+ {s:"gram",id:"g8",q:"哪一句是對的？",o:["鄰居做的蛋糕香極了！","鄰居做的蛋糕非常香極了！","鄰居做的蛋糕極了香！","鄰居做的蛋糕香得極了！"],x:"Vs＋極了。前面不加「很、非常」，也不加「得」。"},
+ {s:"gram",id:"g9",q:"天氣＿＿冷了，你最好多穿一件衣服。",o:["越來越","越越","比較","更加了"],x:"越來越＋Vs：一直在改變。"},
+ {s:"gram",id:"g10",q:"我室友＿＿做菜很有興趣，每天都在廚房做新的菜。",o:["對","跟","給","替"],x:"S＋對＋N／V＋有興趣。"},
+ {s:"gram",id:"g11",q:"哪一句是對的？",o:["我妹妹對日本文化很有興趣。","我妹妹對日本文化很興趣。","我妹妹有興趣對日本文化。","我妹妹對很有興趣日本文化。"],x:"對＋N＋（很）有興趣。「有」不能少。"},
+ {s:"gram",id:"g12",q:"已經半夜十一點了，你覺得現在還買得到火車票買不＿＿？",o:["到","起","懂","飽"],x:"V得到V不到？前後要用一樣的補語。"},
+ // 排句子
+ {s:"order",id:"o1",t:["我","聽不懂","這首","日文歌"],p:"。",alt:["這首日文歌我聽不懂"],x:"我聽不懂這首日文歌。"},
+ {s:"order",id:"o2",t:["這家店的","點心","很便宜","，","學生","都","吃得起"],p:"。",x:"這家店的點心很便宜，學生都吃得起。"},
+ {s:"order",id:"o3",t:["搬完家","，","他","累得","不得了"],p:"。",alt:["他搬完家，累得不得了"],x:"搬完家，他累得不得了。"},
+ {s:"order",id:"o4",t:["來夜市","的","遊客","越來越","多了"],p:"。",x:"來夜市的遊客越來越多了。"},
+ {s:"order",id:"o5",t:["我","對","台灣小吃","很有興趣"],p:"。",x:"我對台灣小吃很有興趣。"},
+ {s:"order",id:"o6",t:["我","找了","很久","，","還是","找不到","鑰匙"],p:"。",x:"我找了很久，還是找不到鑰匙。"},
+ // 看圖回答
  {s:"pic",id:"p1",pic:"tofu",q:"他覺得臭豆腐怎麼樣？",o:["聞起來很臭，可是吃起來很好吃。","聞起來很香，吃起來也很香。","聞起來很臭，吃起來也不好吃。","看起來很辣，其實很甜。"],x:"🤢 聞起來／😋 吃起來。"},
  {s:"pic",id:"p2",pic:"board",q:"他為什麼不知道老師寫了什麼？",o:["前面的人太高了，他看不到黑板上的字。","黑板上的字太難了，他看不懂。","他沒錢，買不起書。","他沒吃飯，吃不飽。"],x:"看不到：因為被擋住了，不是看不懂。"},
  {s:"pic",id:"p3",pic:"full",q:"他怎麼了？",o:["他吃得太飽了。","他沒吃飽。","他吃不起。","他吃不到。"],x:"吃了很多東西：吃得太飽了。"},
@@ -194,19 +200,23 @@ q:[
  {s:"pic",id:"p6",pic:"sugar",q:"這杯珍珠奶茶怎麼樣？",o:["沒有加糖，也沒有加冰塊。","加了很多糖和冰塊。","是半糖、少冰的。","沒有加糖，可是冰塊很多。"],x:"無糖＝不加糖；去冰＝不加冰塊。"},
  {s:"pic",id:"p7",pic:"hot",q:"今天天氣怎麼樣？",o:["今天熱得不得了。","今天冷極了。","今天越來越涼快。","今天很舒服。"],x:"38°C：熱得不得了。"},
  {s:"pic",id:"p8",pic:"exit",q:"要去士林夜市，從哪個出口出去？",o:["2號出口","1號出口","兩個都可以","看不懂"],x:"士林夜市在 2 號出口那邊。"},
+ // 短文填空
  {s:"cloze",id:"c1",passage:"cz1",n:1,o:["擠","辣","甜","飽"],x:"人很多：擠得不得了。"},
  {s:"cloze",id:"c2",passage:"cz1",n:2,o:["各種","一般","平常","大概"],x:"各種＋N：很多不一樣的。"},
  {s:"cloze",id:"c3",passage:"cz1",n:3,o:["極","得","越","更"],x:"好吃極了。"},
  {s:"cloze",id:"c4",passage:"cz1",n:4,o:["習慣","推薦","討厭","值得"],x:"不習慣喝太甜的飲料。"},
  {s:"cloze",id:"c5",passage:"cz1",n:5,o:["起","懂","到","飽"],x:"便宜，學生也吃得起（有錢買）。"},
+ // 閱讀理解
  {s:"read",id:"r1",passage:"rd1",q:"你想喝一杯不太甜、冰塊少一點兒的珍珠奶茶，應該怎麼點？",o:["半糖、少冰","無糖、去冰","正常、正常","微糖、正常冰"],x:"不太甜→半糖；冰塊少一點兒→少冰。"},
  {s:"read",id:"r2",passage:"rd1",q:"你買兩杯中杯珍珠奶茶，一共多少錢？",o:["75 元","100 元","50 元","130 元"],x:"第二杯半價：50＋25＝75。"},
  {s:"read",id:"r3",passage:"rd1",q:"星期一晚上七點去，會怎麼樣？",o:["買不到，因為星期一休息。","買得到，因為店開到半夜。","買得到，可是不能選甜度。","只買得到芒果冰沙。"],x:"「星期一休息」。"},
- {s:"read",id:"r4",passage:"rd2",q:"一般的夜市什麼時候開始？",o:["大概晚上六點","下午三點","半夜十二點","早上六點"],x:"「一般的夜市大概從晚上六點開始」。"},
- {s:"read",id:"r5",passage:"rd2",q:"為什麼誰都吃得起夜市的小吃？",o:["因為做法簡單，價錢也便宜。","因為老闆都會說英文。","因為夜市的人很少。","因為小吃都不辣。"],x:"「做法簡單，價錢也便宜，誰都吃得起」。"},
- {s:"read",id:"r6",passage:"rd2",q:"馬克看不懂中文招牌，他怎麼買東西？",o:["用手指一指。","請朋友替他說。","上網查資料。","他不買東西。"],x:"「用手指一指，老闆就懂了」。"},
- {s:"read",id:"r7",passage:"rd2",q:"馬克覺得臭豆腐怎麼樣？",o:["聞起來很臭，可是吃起來好吃極了。","聞起來很香，吃起來很辣。","他不敢吃。","太貴了，他吃不起。"],x:"「聞起來很臭，吃起來好吃極了」。"},
- {s:"read",id:"r8",passage:"rd2",q:"哪一句是對的？",o:["去了夜市以後，馬克對台灣越來越有興趣。","馬克本來就對台灣文化很有興趣。","馬克已經看得懂菜單了。","馬克不喜歡跟老闆殺價。"],x:"他本來沒什麼興趣，去夜市以後越來越喜歡台灣，現在開始學中文。"}
+ {s:"read",id:"r4",passage:"rd2",q:"馬克剛來台灣的時候，生活怎麼樣？",o:["沒有台灣朋友，有一點兒無聊。","每天都去逛夜市。","有很多台灣朋友。","每天都很忙。"],x:"第一段：「他沒有台灣朋友……生活有一點兒無聊」。"},
+ {s:"read",id:"r5",passage:"rd2",q:"為什麼馬克每次都要買好幾家的同一種小吃？",o:["每一家的做法和味道都不一樣，他想比比看。","因為一家的小吃太少，他吃不飽。","因為老闆都會送他東西。","因為他看不懂菜單，不知道買哪一家。"],x:"第二段：「每一家的做法和味道都不一樣……比比看哪一家最好吃」。"},
+ {s:"read",id:"r6",passage:"rd2",q:"馬克看不懂中文招牌，他怎麼買東西？",o:["用手指一指，再笑一笑。","請室友替他說。","上網查資料。","他不買東西。"],x:"第三段：「他用手指一指，再笑一笑，老闆就懂了」。"},
+ {s:"read",id:"r7",passage:"rd2",q:"第二段的「攤販」，意思最可能是什麼？",o:["在夜市賣東西的人或小店","夜市的招牌","來逛夜市的遊客","夜市的停車場"],x:"後面說「有的賣吃的，有的賣衣服和鞋子」，所以攤販是在夜市賣東西的人或小店。"},
+ {s:"read",id:"r8",passage:"rd2",q:"「他很捨不得走」，「捨不得」最可能是什麼意思？",o:["不想離開，覺得很難過","很想趕快回家","太累了，走不動","找不到路"],x:"馬克很喜歡台灣，要回德國了還特別再去一次夜市：捨不得＝不想離開。"},
+ {s:"read",id:"r9",passage:"rd2",q:"馬克覺得臭豆腐怎麼樣？",o:["聞起來很臭，可是吃起來香極了。","聞起來很香，可是吃起來很辣。","他不敢吃。","太貴了，他吃不起。"],x:"「聞起來很臭，可是吃起來香極了」。"},
+ {s:"read",id:"r10",passage:"rd2",q:"哪一句是對的？",o:["馬克希望下次能自己跟老闆殺價。","馬克已經看得懂菜單了。","馬克一個晚上要花兩千塊。","馬克這個月剛來台灣。"],x:"最後一段：「希望下次……能自己跟老闆殺價」。"}
 ]};
 </script><script>/* 時代華語2 完課測驗 engine — shared by the tutor (artifact) and class (GitHub) versions.
    MODE = "tutor" : instant feedback, redo wrong items, copy a report for the teacher.
@@ -244,6 +254,19 @@ function ls(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k)
 
 let store=(()=>{const s=ls(KEY);return s&&s.results?s:{results:{},tries:0,attempt:1,submitted:false}})();
 const save=()=>ls(KEY,store);
+/* ---------- 作答紀錄：離開畫面、重新整理、中途回目錄、各部分時間 ---------- */
+const LOG=()=>{store.log=store.log||{away:0,awayMs:0,reload:0,quit:0,secMs:{}};return store.log};
+const inTest=()=>!!store.t0&&!(MODE==="class"&&store.submitted);
+let awayAt=0,asking=false;
+function goAway(){if(!asking&&inTest()&&!awayAt)awayAt=Date.now()}
+function comeBack(){if(awayAt){const d=Date.now()-awayAt;awayAt=0;if(d>1500){const l=LOG();l.away++;l.awayMs+=d;save()}}}
+document.addEventListener("visibilitychange",()=>{document.hidden?goAway():comeBack()});
+window.addEventListener("blur",goAway);window.addEventListener("focus",comeBack);
+const ask=m=>{asking=true;const r=confirm(m);asking=false;awayAt=0;return r};
+const dur=ms=>{const t=Math.round((ms||0)/1000),m=Math.floor(t/60),x=t%60;return m?`${m}分${x?x+"秒":""}`:`${x}秒`};
+const hhmm=t=>{const d=new Date(t);return`${pad(d.getHours())}:${pad(d.getMinutes())}`};
+if(inTest()){LOG().reload++;save()}
+
 let student=ls(SKEY)||null;
 let run=null;
 
@@ -257,8 +280,9 @@ function clockSVG(h,m){
 function passageHTML(P,cur){
   if(P.html)return P.html;
   let i=0;
-  const para=t=>esc(t).replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
-  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}</div>`;
+  const para=t=>esc(t).replace(/〔(.+?)〕/g,'<u class="nw">$1</u>').replace(/［(\d+)］/g,(m,n)=>{const on=cur&&+n===cur;const d=run&&run.clozeDone&&run.clozeDone[n];return`<span class="cz${on?" on":""}${d?" done":""}">${d?esc(d):"（"+n+"）"}</span>`});
+  const nw=P.body.some(t=>t.includes("〔"));
+  return`<div class="passage">${P.title?`<div class="ptitle">${esc(P.title)}</div>`:""}${P.body.map(t=>`<p${P.ni?' class="ni"':""}>${para(t)}</p>`).join("")}${nw?`<div class="nwnote">畫線的詞還沒學過，請從上下文猜猜看意思。</div>`:""}</div>`;
 }
 function visualFor(q){
   let v="";
@@ -280,8 +304,8 @@ function home(){
   if(MODE==="class"&&!student)return signin();
   const done=SECTIONS.filter(s=>store.results[s.id]).length,all=done===SECTIONS.length;
   const lede=MODE==="class"
-    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。`
-    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。`;
+    ?`這次考試有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每個部分只能做一次，做的時候不會告訴你答案。全部做完以後按「交卷」，成績會自動送給老師，然後你就可以看答案和說明。<br><b>注意：考試的時候請不要離開這個畫面或切換到別的 App，系統會記錄作答時間和離開的次數。</b>`
+    :`同學，你好！這次測驗有 ${SECTIONS.length} 個部分，一共 ${Q.length} 題。每題做完會馬上告訴你對不對。全部做完，把成績傳給老師。<br>（系統會記錄作答時間和離開畫面的次數，成績單上老師看得到。）`;
   const locked=MODE==="class";
   app.innerHTML=`${header()}
   ${MODE==="class"?`<div class="who-bar"><span>${esc(student.klass)}　${esc(student.seat)}號　<b style="color:var(--ink)">${esc(student.name)}</b>${store.attempt>1?`　· 第 ${store.attempt} 次`:""}</span><button class="btn" id="chg" style="padding:4px 12px;font-size:.85rem">不是我</button></div>`:""}
@@ -301,9 +325,9 @@ function home(){
   app.querySelectorAll(".sec").forEach(b=>b.onclick=()=>{if(MODE==="class"&&store.submitted)return review(b.dataset.s);start(b.dataset.s)});
   const g=id=>document.getElementById(id);
   if(g("report"))g("report").onclick=report;
-  if(g("submit"))g("submit").onclick=()=>{if(!all&&!confirm("還有部分沒做完，確定要交卷嗎？"))return;submit()};
+  if(g("submit"))g("submit").onclick=()=>{if(!all&&!ask("還有部分沒做完，確定要交卷嗎？"))return;submit()};
   if(g("review"))g("review").onclick=()=>review();
-  if(g("retake"))g("retake").onclick=()=>{if(!confirm("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
+  if(g("retake"))g("retake").onclick=()=>{if(!ask("再考一次會清掉這次的作答，新的成績也會送給老師。確定嗎？"))return;store={results:{},tries:0,attempt:(store.attempt||1)+1,submitted:false};save();home()};
   if(g("chg"))g("chg").onclick=()=>{student=null;ls(SKEY,null);signin()};
   window.scrollTo(0,0);
 }
@@ -329,7 +353,7 @@ function start(sec,onlyIds){
   let list=Q.filter(q=>q.s===sec&&(!onlyIds||onlyIds.includes(q.id)));
   if(!FIXED.has(sec))list=shuffle(list);
   run={sec,list,i:0,score:0,wrong:[],answers:{},retry:!!onlyIds,clozeDone:{},t0:Date.now()};
-  if(MODE==="class"&&!store.t0){store.t0=Date.now();save()}
+  if(!store.t0){store.t0=Date.now();save()}
   show();
 }
 
@@ -354,7 +378,7 @@ function show(){
     <div class="eyebrow">${sec.name}${run.retry?" · 錯題練習":""}</div>
     <div class="card">${body}</div>`;
   document.getElementById("back").onclick=()=>{
-    if(MODE==="class"&&!store.submitted&&!confirm("現在離開，這個部分要重新開始。確定嗎？"))return;home()};
+    if(MODE==="class"&&!store.submitted&&!ask("現在離開，這個部分要重新開始。確定嗎？"))return;if(!run.retry){LOG().quit++;save()}home()};
   if(q.t)wireOrder(q);else app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.k,b));
   const p=app.querySelector(".passage .cz.on");if(p)p.scrollIntoView({block:"nearest"});
 }
@@ -426,7 +450,7 @@ function advance(){if(run.i===run.list.length-1)finish();else{run.i++;show()}}
 function finish(){
   const sec=SECTIONS.find(s=>s.id===run.sec);
   if(!run.retry){
-    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};
+    store.results[run.sec]={score:run.score,total:run.list.length,wrong:run.wrong,answers:run.answers,date:Date.now()};LOG().secMs[run.sec]=(LOG().secMs[run.sec]||0)+(Date.now()-run.t0);
   }else{
     const r=store.results[run.sec];
     if(r){const fixed=run.list.map(q=>q.id).filter(id=>!run.wrong.some(w=>w.id===id));r.fixed=[...new Set([...(r.fixed||[]),...fixed])]}
@@ -458,15 +482,24 @@ function finish(){
   window.scrollTo(0,0);
 }
 
+function logLines(){
+  const l=LOG(),now=Date.now(),out=[];
+  if(store.t0)out.push(`開始時間：${hhmm(store.t0)}　作答時間：${dur(now-store.t0)}`);
+  out.push(`離開畫面：${l.away}次${l.away?`（共${dur(l.awayMs)}）`:""}`);
+  out.push(`重新整理／重開頁面：${l.reload}次`);
+  out.push(`中途回目錄：${l.quit}次`);
+  return out;
+}
 function totals(){let sc=0,tt=0;SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;tt+=n;if(r)sc+=r.score});return{sc,tt}}
 function reportText(){
   const lines=[`時代華語2 第${L.no}課 完課測驗（${L.title}）`,"時間："+fmtDate(new Date()),""];
   if(MODE==="class"&&student)lines.splice(1,0,`${student.klass} ${student.seat}號 ${student.name}`);
   let sc=0,tt=0;
   SECTIONS.forEach(s=>{const r=store.results[s.id],n=Q.filter(q=>q.s===s.id).length;
-    if(r){sc+=r.score;tt+=r.total;lines.push(`${s.name}：${r.score}/${r.total}`)}else lines.push(`${s.name}：還沒做（${n}題）`)});
+    tt+=n;const ms=LOG().secMs[s.id];if(r){sc+=r.score;lines.push(`${s.name}：${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`)}else lines.push(`${s.name}：還沒做（0/${n}）`)});
   lines.push("",`總分：${sc}/${tt}`+(tt?`（${Math.round(sc/tt*100)}%）`:""));
   if(MODE==="tutor")lines.push(`練習次數：${store.tries||0}`);
+  lines.push("","作答紀錄：",...logLines());
   const wr=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wr.push(`・[${s.name}] ${w.q}　我選：${w.given}　答案：${w.right}${(r.fixed||[]).includes(w.id)?"（已訂正）":""}`))});
   if(wr.length)lines.push("","錯題：",...wr);
   return{text:lines.join("\n"),sc,tt};
@@ -501,11 +534,16 @@ function wireCopy(text){
 /* ---------- class mode: submit + review ---------- */
 async function submit(){
   const {text,sc,tt}=reportText();
-  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id];secs[s.name]=r?`${r.score}/${r.total}`:`0/${Q.filter(q=>q.s===s.id).length}`});
+  const secs={};SECTIONS.forEach(s=>{const r=store.results[s.id],ms=LOG().secMs[s.id];secs[s.name]=r?`${r.score}/${r.total}${ms?`（${dur(ms)}）`:""}`:`0/${Q.filter(q=>q.s===s.id).length}（沒做）`});
+  const lg=LOG();
+  if(store.t0)secs["開始時間"]=hhmm(store.t0);
+  secs["離開畫面"]=`${lg.away}次${lg.away?`，共${dur(lg.awayMs)}`:""}`;
+  secs["重新整理"]=`${lg.reload}次`;
+  secs["中途回目錄"]=`${lg.quit}次`;
   const wrong=[];SECTIONS.forEach(s=>{const r=store.results[s.id];if(r)r.wrong.forEach(w=>wrong.push(`[${s.name}] ${w.q} → ${w.given}（答案：${w.right}）`))});
   const now=Date.now();
   const payload={lesson:lessonCode,lessonTitle:`第${L.no}課 ${L.title}`,klass:student.klass,seat:student.seat,name:student.name,
-    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:SECTIONS.map(s=>s.name),
+    attempt:store.attempt||1,score:sc,max:tt,pct:tt?Math.round(sc/tt*1000)/10:0,sections:secs,sectionOrder:Object.keys(secs),log:{start:store.t0?new Date(store.t0).toISOString():"",away:lg.away,awaySec:Math.round(lg.awayMs/1000),reload:lg.reload,quit:lg.quit},
     wrong:wrong.join("\n"),minutes:store.t0?Math.round((now-store.t0)/600)/100:"",submittedAt:new Date(now).toISOString()};
   store.submitted=true;store.payload=payload;save();
   app.innerHTML=`${header()}<div class="card"><div class="total">${sc}<small> / ${tt}</small></div>
